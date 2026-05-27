@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kamwi Siyauya — I.T Specialist & Mobile App Architect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Fraunces:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #1b2116;
+      --bg2: #22291c;
+      --bg3: #2a3323;
+      --gold: #d4a843;
+      --gold-dim: #9a7830;
+      --gold-glow: rgba(212,168,67,0.15);
+      --teal: #3ecfb2;
+      --text: #e8e4dc;
+      --text-dim: #8a8680;
+      --text-mid: #bbb6ae;
+      --line: rgba(212,168,67,0.18);
+      --toggle-bg: #1a1e28;
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Mono', monospace;
+      --font-serif: 'Fraunces', serif;
+    }
+    [data-theme="light"] {
+      --bg: #f5f2ec;
+      --bg2: #ede9e0;
+      --bg3: #e4dfd4;
+      --gold: #b8860b;
+      --gold-dim: #8a6508;
+      --gold-glow: rgba(184,134,11,0.12);
+      --teal: #1a8c78;
+      --text: #1a1612;
+      --text-dim: #6b6560;
+      --text-mid: #4a4540;
+      --line: rgba(184,134,11,0.22);
+      --toggle-bg: #ddd8ce;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    ::selection { background: var(--gold); color: var(--bg); }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: none;
+      transition: background 0.4s, color 0.4s;
+    }
+    .cursor {
+      position: fixed; width: 10px; height: 10px;
+      background: var(--gold); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s;
+      mix-blend-mode: difference;
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1px solid rgba(212,168,67,0.5); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1000; opacity: 0.4;
+    }
+    .site-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background 0.3s, padding 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(27, 33, 22, 0.92);
+      backdrop-filter: blur(12px);
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    [data-theme="light"] nav.scrolled { background: rgba(245,242,236,0.92); }
+    .nav-logo {
+      font-family: var(--font-head); font-weight: 800; font-size: 18px;
+      color: var(--text); letter-spacing: -0.02em; text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-right { display: flex; align-items: center; gap: 32px; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-dim); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* Theme toggle */
+    .theme-toggle {
+      width: 44px; height: 24px; background: var(--toggle-bg);
+      border-radius: 12px; border: 1px solid var(--line);
+      cursor: none; position: relative; transition: background 0.3s;
+      flex-shrink: 0;
+    }
+    .theme-toggle::after {
+      content: ''; position: absolute;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--gold); top: 3px; left: 3px;
+      transition: transform 0.3s;
+    }
+    [data-theme="light"] .theme-toggle::after { transform: translateX(20px); }
+    .toggle-icons { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 5px; pointer-events: none; font-size: 10px; }
+
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: none; background: none; border: none; padding: 4px;
+    }
+    .nav-toggle span { width: 22px; height: 1px; background: var(--text); transition: 0.3s; }
+
+    /* ─── HERO ─── */
+    header {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 60px 0 80px; overflow: hidden;
+    }
+    .header-grid-lines {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(to right, var(--line) 1px, transparent 1px), linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
+      pointer-events: none;
+    }
+    .hero-label {
+      font-family: var(--font-body); font-size: 11px; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 16px;
+      opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
+    }
+    .hero-label::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+    .hero-name {
+      font-family: var(--font-head); font-weight: 800;
+      font-size: clamp(52px, 8vw, 110px); line-height: 0.92;
+      letter-spacing: -0.03em; color: var(--text);
+      opacity: 0; animation: fadeUp 0.8s 0.35s ease forwards;
+    }
+    .hero-name span { display: block; color: var(--gold); }
+    .hero-tagline {
+      font-family: var(--font-serif); font-style: italic; font-weight: 300;
+      font-size: clamp(18px, 2.5vw, 26px); color: var(--text-mid);
+      margin-top: 28px; max-width: 560px;
+      opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 32px; margin-top: 48px;
+      opacity: 0; animation: fadeUp 0.8s 0.65s ease forwards;
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .meta-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
+    .meta-value { font-size: 13px; color: var(--text); }
+    .meta-value a { color: var(--gold); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.2s; }
+    .meta-value a:hover { border-color: var(--gold); }
+    .hero-cta {
+      display: flex; gap: 16px; margin-top: 52px;
+      opacity: 0; animation: fadeUp 0.8s 0.8s ease forwards;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none;
+      background: var(--gold); color: #0a0c10;
+      padding: 14px 32px; display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 400; transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #e8bc55; transform: translateY(-2px); }
+    .btn-ghost {
+      font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none;
+      border: 1px solid var(--gold-dim); color: var(--text-mid);
+      padding: 14px 32px; display: inline-flex; align-items: center; gap: 8px;
+      transition: 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .scroll-hint {
+      position: absolute; bottom: 40px; right: 0;
+      display: flex; align-items: center; gap: 10px; font-size: 10px;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim);
+      writing-mode: vertical-rl; animation: fadeIn 1s 1.2s ease both;
+    }
+    .scroll-line {
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: growLine 1.5s 1.5s ease forwards;
+      transform-origin: top; transform: scaleY(0);
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 100px 0; }
+    .section-header { display: flex; align-items: baseline; gap: 24px; margin-bottom: 64px; }
+    .section-num { font-family: var(--font-body); font-size: 11px; color: var(--gold); letter-spacing: 0.15em; }
+    .section-title { font-family: var(--font-head); font-weight: 700; font-size: clamp(28px, 4vw, 48px); letter-spacing: -0.02em; color: var(--text); }
+    .section-line { flex: 1; height: 1px; background: var(--line); }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--bg2); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .about-text p { font-family: var(--font-serif); font-weight: 300; font-size: 18px; line-height: 1.7; color: var(--text-mid); margin-bottom: 20px; }
+    .about-text p strong { color: var(--text); font-weight: 700; }
+    .about-text p em { color: var(--gold); }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .stat-box { background: var(--bg3); padding: 32px 28px; border-top: 2px solid transparent; transition: border-color 0.3s; }
+    .stat-box:hover { border-color: var(--gold); }
+    .stat-num { font-family: var(--font-head); font-weight: 800; font-size: 42px; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-top: 8px; }
+
+    /* ─── EXPERIENCE ─── */
+    #experience { background: var(--bg); }
+    .exp-item { display: grid; grid-template-columns: 220px 1fr; gap: 48px; padding: 48px 0; border-bottom: 1px solid var(--line); opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+    .exp-item.visible { opacity: 1; transform: translateY(0); }
+    .exp-period { font-size: 11px; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; }
+    .exp-org { font-size: 11px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
+    .exp-role { font-family: var(--font-head); font-weight: 700; font-size: 22px; color: var(--text); margin-bottom: 16px; }
+    .exp-desc { color: var(--text-mid); font-size: 13px; line-height: 1.8; }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--line); color: var(--text-dim); padding: 5px 12px; transition: 0.2s; }
+    .tag:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+    /* ─── PROJECTS ─── */
+    #projects { background: var(--bg2); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2px; }
+    .project-card {
+      background: var(--bg3); padding: 40px 36px;
+      position: relative; overflow: hidden; cursor: none;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s, transform 0.6s, background 0.3s;
+    }
+    .project-card.visible { opacity: 1; transform: translateY(0); }
+    .project-card:hover { background: var(--bg2); }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.4s; }
+    .project-card:hover::before { width: 100%; }
+    .project-badge {
+      display: inline-block; font-size: 9px; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 3px 10px; margin-bottom: 18px;
+      border: 1px solid var(--line); color: var(--text-dim);
+    }
+    .project-badge.featured { border-color: var(--gold-dim); color: var(--gold); background: var(--gold-glow); }
+    .project-icon { font-size: 28px; margin-bottom: 18px; display: block; }
+    .project-title { font-family: var(--font-head); font-weight: 700; font-size: 20px; color: var(--text); margin-bottom: 12px; line-height: 1.2; }
+    .project-stack { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
+    .project-desc { font-size: 13px; color: var(--text-dim); line-height: 1.8; }
+    .project-arrow { position: absolute; bottom: 36px; right: 36px; width: 36px; height: 36px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-size: 16px; transform: translateX(-6px); opacity: 0; transition: 0.3s; }
+    .project-card:hover .project-arrow { transform: translateX(0); opacity: 1; border-color: var(--gold); color: var(--gold); }
+
+    /* ─── SKILLS ─── */
+    #skills { background: var(--bg); }
+    .skills-outer { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+    .skill-group { margin-bottom: 40px; }
+    .skill-group-title { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+    .skill-list { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-list li { font-size: 12px; background: var(--bg3); color: var(--text-mid); padding: 8px 16px; border-left: 2px solid transparent; transition: 0.2s; }
+    .skill-list li:hover { border-color: var(--gold); color: var(--text); }
+    .skills-right { display: flex; flex-direction: column; justify-content: center; }
+    .skills-quote { font-family: var(--font-serif); font-style: italic; font-size: 22px; font-weight: 300; color: var(--text-mid); line-height: 1.6; border-left: 3px solid var(--gold); padding-left: 28px; margin-bottom: 40px; }
+    .edu-item { padding: 20px 0; border-bottom: 1px solid var(--line); }
+    .edu-degree { font-family: var(--font-head); font-weight: 600; font-size: 15px; color: var(--text); }
+    .edu-school { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+    /* ─── CONTACT ─── */
+    #contact { background: var(--bg2); text-align: center; position: relative; overflow: hidden; }
+    #contact::before {
+      content: 'HIRE'; position: absolute;
+      font-family: var(--font-head); font-weight: 800;
+      font-size: clamp(120px, 25vw, 320px); color: transparent;
+      -webkit-text-stroke: 1px rgba(212,168,67,0.06);
+      left: 50%; top: 50%; transform: translate(-50%, -50%);
+      pointer-events: none; letter-spacing: -0.04em; white-space: nowrap;
+    }
+    .contact-headline { font-family: var(--font-head); font-weight: 800; font-size: clamp(36px, 6vw, 80px); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 28px; color: var(--text); position: relative; }
+    .contact-sub { font-size: 14px; color: var(--text-dim); max-width: 440px; margin: 0 auto 48px; position: relative; }
+    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; position: relative; }
+    .contact-chip { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--text-mid); border: 1px solid var(--line); padding: 12px 28px; transition: 0.2s; }
+    .contact-chip:hover { background: var(--gold-glow); border-color: var(--gold); color: var(--gold); }
+
+    footer { background: var(--bg); padding: 32px 0; border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--gold); }
+    .footer-copy { font-size: 11px; color: var(--text-dim); }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes growLine { to { transform: scaleY(1); } }
+
+    @media (max-width: 768px) {
+      .site-wrapper { padding: 0 20px; }
+      nav { padding: 16px 20px; }
+      nav.scrolled { padding: 12px 20px; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(27, 33, 22, 0.97); padding: 20px; gap: 24px; border-bottom: 1px solid var(--line); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+      .about-grid, .skills-outer { grid-template-columns: 1fr; gap: 40px; }
+      .exp-item { grid-template-columns: 1fr; gap: 12px; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .hero-cta { flex-direction: column; }
+      .btn-primary, .btn-ghost { text-align: center; justify-content: center; }
+      .scroll-hint { display: none; }
+      .nav-right { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav id="navbar">
+    <a href="#" class="nav-logo">K<span>.</span>S</a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="toggle-icons"><span>🌙</span><span>☀️</span></span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <header>
+    <div class="header-grid-lines"></div>
+    <div class="site-wrapper" style="position:relative;z-index:2;">
+      <p class="hero-label">I.T Specialist — Livingstone, Zambia</p>
+      <h1 class="hero-name">Kamwi<span>Siyauya</span></h1>
+      <p class="hero-tagline">Building resilient digital systems for education &amp; fintech across Zambia.</p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Phone</span>
+          <span class="meta-value"><a href="tel:+260974449780">+260 97 444 9780</a></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Email</span>
+          <span class="meta-value"><a href="mailto:kamwisiya@gmail.com">kamwisiya@gmail.com</a></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Portfolio</span>
+          <span class="meta-value"><a href="https://zeditclass.000webhostapp.com" target="_blank">zeditclass.000webhostapp.com</a></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">NRC</span>
+          <span class="meta-value">250189/71/1</span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <button class="btn-primary" id="downloadCV" style="border:none;cursor:none;">
+          ⬇ Download CV
+        </button>
+        <a href="mailto:kamwisiya@gmail.com" class="btn-ghost">Get In Touch</a>
+      </div>
+    </div>
+    <div class="scroll-hint site-wrapper" style="position:absolute;right:40px;bottom:40px;width:auto;">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="site-wrapper">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">About</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I'm a <strong>full-stack developer and I.T specialist</strong> based in Livingstone, Zambia, with over <em>9 years</em> of institutional technology experience at Linda Secondary School under the Ministry of Education.</p>
+          <p>I specialize in building <strong>zero-cost, offline-capable systems</strong> tailored for Zambian institutions — from school management platforms to fintech lending apps — using modern web and mobile technologies.</p>
+          <p>My approach bridges <strong>education technology and software engineering</strong>: I architect solutions that work in low-connectivity environments, replacing manual workflows with automated, data-driven systems.</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-box"><div class="stat-num">9+</div><div class="stat-label">Years in Education IT</div></div>
+          <div class="stat-box"><div class="stat-num">10+</div><div class="stat-label">Systems Deployed</div></div>
+          <div class="stat-box"><div class="stat-num">B.ICT</div><div class="stat-label">Univ. of Zambia</div></div>
+          <div class="stat-box"><div class="stat-num">CCNA</div><div class="stat-label">Cisco Certified</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="site-wrapper">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Experience</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">2016 — Present</div>
+          <div class="exp-org">Ministry of Education<br>Linda Secondary School<br>Livingstone, Zambia</div>
+        </div>
+        <div>
+          <h3 class="exp-role">ICT Teacher &amp; I.T Specialist</h3>
+          <p class="exp-desc">Administer institutional data systems as School Planning Officer. Built and deployed an Offline School Management System using Vanilla JS and IndexedDB ensuring 100% uptime in low-connectivity environments. Maintain hardware and network infrastructure for national examination centers. Design and deliver Computer Studies curriculum for Grade 9 and Grade 12 learners.</p>
+          <div class="exp-tags"><span class="tag">JavaScript</span><span class="tag">IndexedDB</span><span class="tag">Network Admin</span><span class="tag">Education</span><span class="tag">System Admin</span></div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">2011 &amp; 2016</div>
+          <div class="exp-org">Electoral Commission<br>of Zambia</div>
+        </div>
+        <div>
+          <h3 class="exp-role">Verification Inspection Officer</h3>
+          <p class="exp-desc">Audited registration databases and ensured data integrity for the national voters' register during two election cycles. Conducted field verification of voter information and applied systematic database audit processes.</p>
+          <div class="exp-tags"><span class="tag">Data Integrity</span><span class="tag">Database Auditing</span><span class="tag">Field Operations</span></div>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Prior</div>
+          <div class="exp-org">Kafubu Water &amp;<br>Sewerage Company</div>
+        </div>
+        <div>
+          <h3 class="exp-role">IT Technician Intern</h3>
+          <p class="exp-desc">Gained foundational professional experience in enterprise IT operations, hardware maintenance, and network infrastructure within a utility company environment.</p>
+          <div class="exp-tags"><span class="tag">Hardware</span><span class="tag">Networking</span><span class="tag">IT Support</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="site-wrapper">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Projects</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <span class="project-badge featured">Featured</span>
+          <span class="project-icon">🏠</span>
+          <div class="project-title">Livingstone Real Estate Platform</div>
+          <div class="project-stack">Kotlin · MVVM · Clean Architecture · Supabase · Drive API</div>
+          <p class="project-desc">Production-ready Android rental app following SOLID principles. MVVM with StateFlow for reactive UI, Clean Architecture layers (Domain/Data/UI), and custom Google Drive proxy as cost-free media hosting.</p>
+          <div class="project-arrow">→</div>
+        </div>
+
+
+
+        <div class="project-card">
+          <span class="project-badge">Education</span>
+          <span class="project-icon">🏫</span>
+          <div class="project-title">Linda Secondary Results Portal</div>
+          <div class="project-stack">Next.js 14 · TypeScript · Google OAuth · jsPDF</div>
+          <p class="project-desc">Role-based portal for teachers and students with automated PDF report generation, Google Drive cloud sync, and secure OAuth authentication.</p>
+          <div class="project-arrow">→</div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-badge">Education</span>
+          <span class="project-icon">🖥️</span>
+          <div class="project-title">Offline School Management System</div>
+          <div class="project-stack">Vanilla JS · IndexedDB · HTML · CSS</div>
+          <p class="project-desc">Single-file browser-based SMS for 100% uptime in low-connectivity Zambian schools. Timetabling for 32 classes and 67 teachers — no server dependency whatsoever.</p>
+          <div class="project-arrow">→</div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-badge">Fintech</span>
+          <span class="project-icon">🏦</span>
+          <div class="project-title">Loan Management Platform</div>
+          <div class="project-stack">Node.js · PostgreSQL · React · Kotlin Android · WebSockets</div>
+          <p class="project-desc">Full-stack loan management system with real-time WebSocket sync, RBAC access control, and a companion Android app — architected for Zambian microfinance institutions.</p>
+          <div class="project-arrow">→</div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-badge">Education</span>
+          <span class="project-icon">📚</span>
+          <div class="project-title">ZedIT Class eLearning Platform</div>
+          <div class="project-stack">PHP · JavaScript · CSV Class Tools</div>
+          <p class="project-desc">Interactive learning portal for Computer Studies with Grade 9 &amp; 12 study dashboards, exam prep tools, and curriculum-aligned content delivery.</p>
+          <div class="project-arrow">→</div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-badge">Android</span>
+          <span class="project-icon">📱</span>
+          <div class="project-title">DevCoach Android App</div>
+          <div class="project-stack">Kotlin · MVVM · WebView · AI Integration</div>
+          <p class="project-desc">Learning companion for developers with AI browser via WebView, schedule-based push notifications, and curriculum maps across React, Next.js, Node.js, and Android MVVM.</p>
+          <div class="project-arrow">→</div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-badge">School Admin</span>
+          <span class="project-icon">🎓</span>
+          <div class="project-title">Narty Rock School Portal</div>
+          <div class="project-stack">Next.js 14 · React · RBAC · Google Drive</div>
+          <p class="project-desc">Full school portal with Report Card Generator, Announcements Board, and Homework Publisher. Role-based access for Admin, Teacher, and Student roles — navy-and-gold branded.</p>
+          <div class="project-arrow">→</div>
+        </div>
+
+        <div class="project-card">
+          <span class="project-badge">Tools</span>
+          <span class="project-icon">📊</span>
+          <div class="project-title">Ace Tech Solutions Website</div>
+          <div class="project-stack">HTML · CSS · JS · Formspree · Mobile Money</div>
+          <p class="project-desc">Business site for Ace Tech Solutions covering all service offerings, MTN and Airtel Mobile Money payment instructions, and Formspree contact integration — single-file, zero hosting cost.</p>
+          <div class="project-arrow">→</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="site-wrapper">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Skills</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-outer">
+        <div>
+          <div class="skill-group">
+            <div class="skill-group-title">Mobile &amp; Frontend</div>
+            <ul class="skill-list">
+              <li>Android (Kotlin)</li><li>MVVM Architecture</li><li>Clean Architecture</li>
+              <li>React</li><li>Next.js</li><li>TypeScript</li><li>Vite</li>
+              <li>Tailwind CSS</li><li>HTML / CSS / JS</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">Backend &amp; Data</div>
+            <ul class="skill-list">
+              <li>Node.js</li><li>Express.js</li><li>PHP</li>
+              <li>SQL / NoSQL</li><li>Google Sheets API</li><li>Google Drive API</li>
+              <li>Supabase</li><li>PostgreSQL</li><li>IndexedDB</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">Infrastructure &amp; Tools</div>
+            <ul class="skill-list">
+              <li>Cisco CCNA</li><li>Linux</li><li>Network Security</li>
+              <li>Netlify / Vercel</li><li>Git / GitHub</li><li>Redux Toolkit</li><li>WebSockets</li>
+            </ul>
+          </div>
+        </div>
+        <div class="skills-right">
+          <p class="skills-quote">"I build systems that work in the real Zambia — offline-first, zero-cost, and built to last."</p>
+          <div class="edu-item">
+            <div class="edu-degree">B.ICT with Education — Credit</div>
+            <div class="edu-school">University of Zambia · 2018 – 2022</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">Diploma in Information Technology</div>
+            <div class="edu-school">Copperbelt University</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">Cisco CCNA Certification</div>
+            <div class="edu-school">Cisco Networking Academy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="site-wrapper">
+      <h2 class="contact-headline">Let's Build<br>Something.</h2>
+      <p class="contact-sub">Open to freelance projects, consulting, and full-time opportunities across Zambia and remotely.</p>
+      <div class="contact-links">
+        <a href="mailto:kamwisiya@gmail.com" class="contact-chip">✉ kamwisiya@gmail.com</a>
+        <a href="tel:+260974449780" class="contact-chip">📞 +260 97 444 9780</a>
+        <a href="https://zeditclass.000webhostapp.com" target="_blank" class="contact-chip">🌐 Portfolio</a>
+        <button class="contact-chip" id="downloadCV2" style="border:1px solid var(--line);background:none;cursor:none;font-family:var(--font-body);letter-spacing:0.1em;text-transform:uppercase;">⬇ Download CV</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="site-wrapper">
+      <div class="footer-inner">
+        <span class="footer-logo">Kamwi Siyauya</span>
+        <span class="footer-copy">© 2026 · Livingstone, Zambia · Built for Vercel</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── CV base64 data
+    const CV_B64 = "JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUiAvRjMgNCAwIFIgL0Y0IDYgMCBSCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nIC9OYW1lIC9GMSAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL0Jhc2VGb250IC9IZWx2ZXRpY2EtQm9sZCAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjIgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iago0IDAgb2JqCjw8Ci9CYXNlRm9udCAvWmFwZkRpbmdiYXRzIC9OYW1lIC9GMyAvU3VidHlwZSAvVHlwZTEgL1R5cGUgL0ZvbnQKPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0NvbnRlbnRzIDExIDAgUiAvTWVkaWFCb3ggWyAwIDAgNTk1LjI3NTYgODQxLjg4OTggXSAvUGFyZW50IDEwIDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLU9ibGlxdWUgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0Y0IC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNyAwIG9iago8PAovQ29udGVudHMgMTIgMCBSIC9NZWRpYUJveCBbIDAgMCA1OTUuMjc1NiA4NDEuODg5OCBdIC9QYXJlbnQgMTAgMCBSIC9SZXNvdXJjZXMgPDwKL0ZvbnQgMSAwIFIgL1Byb2NTZXQgWyAvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJIF0KPj4gL1JvdGF0ZSAwIC9UcmFucyA8PAoKPj4gCiAgL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjggMCBvYmoKPDwKL1BhZ2VNb2RlIC9Vc2VOb25lIC9QYWdlcyAxMCAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL0F1dGhvciAoYW5vbnltb3VzKSAvQ3JlYXRpb25EYXRlIChEOjIwMjYwNTI3MDIyNjUzKzAwJzAwJykgL0NyZWF0b3IgKGFub255bW91cykgL0tleXdvcmRzICgpIC9Nb2REYXRlIChEOjIwMjYwNTI3MDIyNjUzKzAwJzAwJykgL1Byb2R1Y2VyIChSZXBvcnRMYWIgUERGIExpYnJhcnkgLSBcKG9wZW5zb3VyY2VcKSkgCiAgL1N1YmplY3QgKHVuc3BlY2lmaWVkKSAvVGl0bGUgKHVudGl0bGVkKSAvVHJhcHBlZCAvRmFsc2UKPj4KZW5kb2JqCjEwIDAgb2JqCjw8Ci9Db3VudCAyIC9LaWRzIFsgNSAwIFIgNyAwIFIgXSAvVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjExIDAgb2JqCjw8Ci9GaWx0ZXIgWyAvQVNDSUk4NURlY29kZSAvRmxhdGVEZWNvZGUgXSAvTGVuZ3RoIDY3OTkKPj4Kc3RyZWFtCkdhdTBJPyRrPjdQLm84R15zLiZPWmAvTzBJZFEhbmojRi86KkIuY0U0aExVUEw4SlhSLVBFRDZWIU4+VXI9MTRXKF8yZU1QMT4iTGIlaDdiYldDRnAkcFtyTCVmX0ZGY1hPbEddNS4tNks0JSRPbFdZXy45WEYkbUcnPGghYGhQQVVSYSQoZGhTRiEpS2gsP25wVCEobk9pXmA9NzJcYitSJitMJDU6WUBSaGQvVFVuRitgSjI7cTVNM0skOmtkKzEiVTErP1xyP0EiYVY/PVREZWFHTlFCUi0/LjsvQlhdVDlWUm1cYEZnWiFNPl9oJUtMdXJKYFQocSFwSENnImBmQ1RjUU9IJVwxUkk+VypHPWRlISJIbEYvWD1UPzF1YXJNV0xUcWlLIW5fSG9ybjJWWiIhPWkuR204TDVJMFUpWktvOG4qaXIqc2E+LXFhWmUwJGNnVl9oci9LM0lUX1RsZkdDcV9OWy5VUTReY1tLN0RTIiIucVpCT3NNU1s/QGFlWCZdSCVPKlZQODNPKVtxJ1RWQ29paE1wSDZzN145X1tvWjI8akxONFwyPjc/RixSVFRyUlJtXjhdOjdtIW5XVzlndDpWYEpCMiJIKThWa0BmQipBUzpPK0NYbDFTZl00RUQ5QjApMTRSRUZcN15FSjhZMGNZQyZuVUtEdG5uTDA4UmFsOkEpQFNFXV86L3NgYmw8cmRXXDlaYGY/SDs8TzYrVzdlK05OXypRZy9yOTFhUHQ8Sl5qaTJWSkBNQjNEN2I/cmlvRlkzKkspU20zQl1oczBYcGs+dSc8TzJlR1E9KiEnRyRGIlVmViVSMzAyUmBkS1wiOFtALVtWRipIOSRpTzZiXjJvaC1vSk4kLyhxMUVNQCVPRkksXktQN1xVRnAsM00kN0IjRGRPI29nb0lQMHFUZnRNRmhcQU9DJ1pNWSpNKis8LjlJRlppT2pSYzUkKichQS9dLXUwWV86VVcuRWBGYG0zdUlvKCNFSERZXWwuP0xyRy4uak9JVVRncFJDVCkiJzYuN0Mib1htKi45OGVHPj8wTmckKC9Wa0dLW0REI1dicmBQcWJqLG1CSG4/cUlXVVQuVlFqKV4wJGAkQmA3PWFOQEUlMCJzPmZZKW1zWUhac3BZIyFxbyhCQ0RFSENtLy87UCUoO0NTdFtiVzd1WFxVQlJpMzJubFswMzwhLzwvVWhLdTwrNTtgRm5PZD9dMCQ/QCY7WV4kXyxEOyQ4aSshVWZFPUFJXCpDVU9WVnBcJjFHX08uSj5OKiskKkpMZ00/SjIsJ1lYQD5WcXFrQikxM1R0MmZDX19LQlVgYlE1LzcqKWwnR0M1YG5uQmNTZ0g2ZjI0ZkViVkFdW2JSSGhSMzhFMUtWXSFOSiRBLydlVlQjUypJVTJeLzlPWiJDY2owIlhocFhpPiZdOWQxTkBfP204clBwISVmaXJYMi9HIjIvJ2tkRFo0QHFqWTpKdHJmOE9kUlAsIlVgMG8iKTFLK1hAQTIqM2NFJS1TYCNLTWRWT1Y8ZDY3OGBrQW4iMjRkMnFvXS9GTy5fZE9McDlUNmxxbDtlUjZOYEIqQz5hVVIiMUpQNlt0Vkk9RCs9ayc2TmBBX0BjLjR0IjFKUDpbcWsqR1NQVEZfaVhUJTYqLiVlJklUaSowVTkzITlrQzo5QkJSYl8rQmtaRC5xXWJfU0YpJ1NKXyRdQVReMjZARzhPTkBaQ2hoaik2TEVNTz1RLUN0U2RWZkEwQ0VlNTdra0FEWVNESmNsMzA4PzU6PVlnPzBhJHVtWUZnJSMpIWkmNz9GWihLWEFoIkVFZEViZi9iNHQlMC8sI01kVGkmPGRsWU0yL1kpOEUqX2VKKXR1IzsrInRrJzRlS1dhSiJKcVFvQHR1NE1BMXJubW5RVy00aEgqVjVIL1puSjwzJ0lPP25EWUA9WEcqSjwzJ0lPPzNNc1VdRWRkIUNIMlsmMkZNJjEnZUheI1FbOGQhLS1bQzhkR2pAa2g0UjE+QlU3KSNkR1VCTGBmKkErQE0jPjcjMnNSTGBmKkEqP2RiciYwWlc6K2EvTUUmVkxFJUtFdVJOJjBYbCtxIjJiLXJEaCdjIjlmaEwiVkNrQCZJJkNOIjlmaEwiaGwzMEUjS0Y4Ji89byJUWVEyUV5rODtxTnQ8IWIkND9EKTFAKkckIjBbJ1A+JV1wKyFZOGBBJXE1U05AZmQwTSFpSWNoTSpuO28pMlNZKFFzLWdgT0sqXlo1OFA0T09MVHBDWFlVWSlJVnRVZEFdYSovQV9EOm9qTzxyKCQ7XCJEW1dUVEhEPGprLGdOSkJTXDpda20zTypFSyVQJk8nTS9AJVxHdGkvMSteIV4rJ3FXVXVbWlMpOydxVi9SYGRHLDxEdDolNiIkYHQqamsiUENJZkRgYzozZzcuM1lmVFMlP184UyNcckUxNko8LidhSzdHJ0Y0Yms3Tj5xcS1qOyxRbUdIS1oxRCtFUk8/REAkOjc4JWdRb2xrNzU+dSRFRW9CNyJwajdDRyk9IiFWKlg1P15WSiVuJiFUQFAkMCM5RS5PRktmdTlpU0hqKkhOdFNYKlY+QipLO051IypVRmc9TmtMJlRwJ3MuOTQ2UnBVKkFsVjdTNXJxQ1lnXyhFUFBtQVBBKjlNO1NWJURxJVFgQiprWzxTSEs6UllPWiNlOTZrRmRIdUtBTmtTZCkiIW4jPE4wPUtVbWI4NCw4YG9oTCZuTG1DdSQ7Qy5FNmk2I2IxOkU2ciQ0Y3A7V3Q2I11YXkpxS2Y2NW0+KGptMEYxTyNTJjxpJWRGPjk2KSE0VT1uW25OcWg8OzxAYWUoSjh0TipQKkokS1tKTydIajYlc2tVImJBckNKTy9aLyUkQ2YhKSRDL1MsO0AxXTBaWUBqVyQ7RUxNI21lQ0hXZi9nUjlFRD4oP0tSZElEYmdecWhCPTVeODdZIUQlV1JeJFImNE9DPlcoSTcsT05lXCZiTHI+Nk85SFtESHUucD9mZz5ZJkJHc0s/TUVlZV9uYlwyRS9aPzYuLWBpZGBzTUxjYFlSVWYqPD87QnMnb2FuamMxWzFJanNdWk9XOGJeYC9RTDU7S0pSSzFydSsrbDU3ImpFUGtoK1tjUmxXJXA3JzdLV28/OWEwRDs+UFc3aGlmLUxhXzpHOzhrdC02WidVcioqcE5ddS5xajAkOldXUT0lQmdjMydWKGxzWUxFTC80YUsqXjNLRmYwNlU7ODFaVyk/JmhkMzJXRlhxZFBPZS5uK1VfaiwqLTtbZUIzWkZJKi1BVFJVYWNLYkNYZG9DXEZuI3VALyQ4IkFzV0ooRkAvRE1GP2tuYGpUWmxMOzgkOCJCZmA1Mk50KDJhX2NGUCJacj4+a3EoaVhUJTlVOmMyUDJRUEIqTDs7KmtRT2c7NV4tRFhpckRkX28qKkQ8QjleT3I7VzFALHFXU0JnSFJDND5uNyVwLlIyUlctWTtgaEdvPGszIiJrPGVPak1gWTIqMGZrREdocVlMJjJRdURHXjNmYVsvXiI9MWZqRXVAKjgzRj5IJi8hbjZMPEpPOEVnb1xsRWhRVCxTJzMoTU1SZio1als4TT1RdXVSKypVLT9nbCI3IWwmZUhvXCN1M1VpUEpDMklVSmYlayU3YyFmWHQ/TioySXMmP0FoWEs/QWhYSz9BaWIuO1NLJFssJFtWRCQqUWM3Q2hpTC8/QWliLjxrYkhfLCRbWHNscz9FNk5OWWRYXXQpYmpRQC9oOG1tNW9FVHJJSVs1JHApP2clWShqXzFmR2E4bWRFa0BKOUYlXWBgVFFnUDwtMnI3a05bQTEtIVw9NkslJF5IUy0hQEUvKTk9N1lYXzBcIUdAJzU1XDBbPVciUzQrVm0hNSovUlw2VDlrSl9FOCMxJXM1ciZfRFRYRCxUV2ZiQXUnOi1OZUBKLzNlTyNQLmtsV3VnNjUkMz9BKCNSU3FJKk9xND8pcCc2dGcjXUwmQjZYa18hJzpOViY4QWpDQ0wzXyFFXlZwXTwkaGVXLyNCYm1mJjddcDM+Qz1bZzRRSFNcKl0pckVrKFRiQWlTJ0JiUGxQYWlEUi0iIW1Ya1chSG0oMi91KzNUU1ZIRHBbZ1o4c3FUPUdHblFxRywqNktUS2dZOVYtJV1CUTYxXDcjJ2RBSnMkP0UralZAIjRRIjtAPll0IihdVkNUKkFZLVBtMTEtOF9HQC5LKlUwUE5cZ3BfUWkuKkUibnE1UG5LZE9QJDNlU2hsNDItSlpiYkRxIiI0WVE1bUFkUE1fSCE7J18pdG4hNmYtWnJsaGVtQTVVMjlTNkczKjxWblc7OWw6ZlxmLD1nXE5JZVs5RkZcWGtxIzZXUz4hPVRzSl9DKFxbaURlMkgsSF9VKm4sLSlYNE0qO0VJMiooSGBoO0VkLnBTREFcPElcQis1XWFZQUptL183IzxzYnRiLi1DcUU4TD5uXkc6PCkpZWRtZWVhbEVUREpncDVcTUwoZS48ZzpSbU9XdCNGMC1FNFhzXTorK2E1RTBnXTlhT1pPI149W3JOXWguIU9xbyNLRCsyVmJpMTNxY102LS0tdVlJUiJfZEY9IzZuWGlNWDR0azM3aW1XVSVfQlhLT1BsOmpBVkFNb1dJXiM2cWcmW1ByXWhUL0lSQlskZzRkO3FfM3Bacm1PXGsjc2MzPlljRHQ2ZVonPUJgaiU4QWVAXytEcmpHMDs7MShlRW5FTmhQQHUkbW4oUyZ0XV8rMUxyTWVRNlo3TmJpYmEhP1Izbl5mYXIyRDlbQiUlT1cpZzVURWg+W1VOWCErVUgrIkkmbVdHTlVkIVFDKWs3ME1rNSNnc05vLENMLmlxQkNPYDdJM1FQNyQsLT0rRk9oYGRNRUxrMC1XcW9gOjs6bUpUJzcwZCI/XV9GTUUzNFwkLUQwbU5KWUBBYk1WYVtLNC5LLyo9KW1qIVtqYGFHZUlFcXBYNktxOlhsb2ZqVTpnUGpva1BGcjdnRVNkZUpURUlZRi1rNilFXjhYdURaWlckSSMmXEJbZWlrQjU7Qi9iNydtKDYlMjRIaTVeNSI7Qy9PK3QzWkk1NVUhZmpaYGFVN1w4VWZMOGRuRWNZakBeYWxlRS03aiopaid0Uy8yRmp0cWE9SXFQVGgtbHJtNzg/aWxHMWJpOD1NKVxaXkZaUUxIVjFIcnFXRHUrcidfLURiTE46bic+PyxvW15vKFM4QzoxQVFzS0hYLShgOlBTSzRhL1wxUU8jajVfSWwsYik0Z04iLlZPZ1tGSzROYmdhZnAzWUREZTJILEhfVStZcSROaysqPUM0VllkdG44bXJITjJZbCM2OysoMGY/Jm43L044PFotPmBBUV9xU1IjMFFNdGxCMFdRYSxxQmlHIWhKQiknZztxYSgjLkFGZm9fNmojPVE0VnI7NmVxTTgiSHVkPCtDVS8pbmdvQixvPCRBVWpITVJxTjtFVSVkXGJBL2QvLmlkNGhyZ3FnOHJrcCpvPi08YmxTa3VqSnQnc25CV1s/Ik9bXjxnXDQlT2NoIlQiOiIwKiNhV3RzYic5b0FRUjdEcS4pUktjXmJkWGxfcG1ySWdLVDY3XiY5ME8qLTZpJD9kKls0azJ0RT1zUlhFLUgsXlY5bjs8QCdfcDdLQEgkbF5dcV1ScC9oYGxnOisiYC5JUWdKYkhnNyVzVW8xalNcWWcxPmBeXnJFZnNUNzpEPi03LEQ1YnNZN105SS8tNC86cEliWFhrTCwtXGsqYFMhYmdEOGZENS9gNkJpYjhiOSgyQ2wiUjtCMm1DVCxZXnRYMWhtPDo0X3I2UUM4YGJQXC4kUCovPUs5cFBUTiFWNC1UTVkoSWIhNFs2STVmTFJ1STBsPC02RFQjSUpPWlpubCRiUDEnLypJOEsmZT9jWlpUI0Zebj1oXi4/XFk+XDdPLVRvMVAuMWNiZlwoRzNHbXRhdG5uWXQ+bEVOcyI+XSkrYj5hNSZnWzk1QitRX0RoKyRfYmpWaSlBPkwrQV8yJio+NHViI2JoXjcpTXBeQjNDRic4QVsmLjBSSHBbXU9YQzQmNkVTVU5WRVRecCpLKU9rZSgkWnFRVT5NbUNsNUtiQzdoJmc7P2hDTl0vKTFCKVp1SWhhJUpPO0soXmZFTWFdTGBpMloucEFqXEZsSE9uN2dGVzpYaFhRK3VEWjliQGpsayF0UEVDKm5KcCNNMm9FK08qKUY2Xm1QaUMkdWRcMiVnXDdOTi5DN2UyUk8pdSlcSVE9RUskRy5SZEM8Y0IzZ2sxZElTPyNTWmlsZ1plLkV1KyNlVD9UK01QZDtkOHJiTjFqUjtaWmluMyZkIkxdLl0hbmBORz9KJG9YRmJkVHBGK29XSEVqKiZENVM0MlhSYksvQGBfb0tnMWNMNEEoJF5zc1A3Uy9FKjdGTmx0LyRiKSxxX1AqTGtbZHByMCo/bFBSNy9mPl42UmZzcFopbCNIQzopS2I1YFxsQWVFN1NEcmpHQFdMJW1VN3E1NTY8JkhGbDM1OiQ3RicpbChrTFZVJEk7QCQyVDc3Z2tdIWRhT1VuYSQqJV1jbms/anNIWF9aSGU4YW90SjJQMThIVFUoMWZKOVY2NjdNPUVfaDciYyVfWSdXcS4iJyNxZ1pPIUdTW21JREUlZDJwb05CV2JVTE82TTBRTW1LVjdDY19fOlNoMXJOUD5vTSxQLXQ7SiQrTSdFQl9uLkpfM1wwPG45TStcbHBfLXBAbkMwUEMkUVBFNGwoS0hpLjdTKU48VlA/YmhqJEMvcnRLRVJFOVlcTkxbVTNqOl9fMig/RSVOWV0iM0BoQFlgKDtaPHI+P01tVlsoLC9XQDgjUmRcNzYqMGtXQ0VhVE42NnNTLy09MV1WQVU6YSUnayg0cWZKWEVtUl5GPTBcaCZbYHI1ZiInXzpUcTc4NHVtczdKYmBYNixCT0lDYUNfQ0NWaEJVKSkvPjMwYDBrKVt0QCYqaDdbQD9ubEA7YnBJNFhuIkZTblY6O0FmaD1PTGFaQzhmLmA1J0tcJz0lPigwcEBqSV0xVUZiXi8lVHJiVGFbZ1FkJFVcXklQYyVoTnI7RG9JIUFeImNqcG9ZbGMpMlZiUj1NQ0tcVWVgWHE/XkFmY09IXjtiZ0lLSmNjci0hLmZASzREQzxGamIzUSZmSmEkZiJQX2JObCZibHVMSylLLmlXU1psbE8yPVg5NiElUlAxSlIyTyZoUGZDSk0uPSdiYD0rN2pxLk4vMT9xWCIzMVZvKV1vRSclbXFHNlhKPFJncWA1TEtbaUFkXjMnPGpDLGdQWnJVZk46PzcsOjNuMjwzU0NadGVdVkc5Q14xSSQ4OmxRRFZEVls0KWFgcDk+PklXLmUnYEo/TEpQYUNVYnItK0xfakFCMXA4ZD0hI0ZCI0E6Q2dQXTxFUUcnTVVxKlhVQGdSJkAsX20mZjplY1UnJVpAVzdNXFpkbFpFXVJgJG5sbjZUcmltKktgPThsWko1Q1ZEa0R0WShnXUoyImEuK0xsdTFsOi5cV1wxQy50SSk0J0deLyQhTVliQiRFImshW1lnUzNfcmVhZm1tXz4uS2RFbmYzZzoxZW87R2NeaEZbP0pnYCQ0TnQtPT5LPSQwYVBeKENVWXVJdWEvI1NcQGw+QT0tSFA6OzsvT0xXNmI4YmpAJ1NVXTVTNGR1UGI4MUEtInQtPytkYk1cJFsvSHJMUCxnbUsrWSFvWnNgJi45VkEkXjQ0RnE3aFtwLy8qMW8pU1E/WT42KkA/XFRNb3NocilPQSk2Wk02Mk5OPFdtKGdHWGd0TS1QXURgWyxhXTVfdCVxIlM6WVg9aj9pOCokUl1TMUxHbmtqVGNAVj9sJFRWcGY7Om5TMyElKEc6XDJSTDV0S1RRY2cjOSgkdEE+OWwnLyZnZkVRWCxJZ1RUKDxhP29aKiYjIjFvWF5CYE5KTS4wMW9BWE1BRy5HaEguM1YtLTdFa0hucUNYOkY3cGgzPFUzI0MsT0Z0SD8pT25xJF0wKDtBXmclO01RQT41Y3JDTFZHPCQwKlIrbFpkbDAwcldWYnMuZlB0Z2pbWS9LX2gzbT0kRCsmSWJMQWVaPl9bJVojKT9DOiZGXG1qJERJT0xiOyw3Wi4sRzohMCI+Z0IzbyJrWmc+LktkRSNgLk9eTj5xZClabF8zRGpiZUc0Ok5bPSlbNCc7TVhsODJKSXI6dTdcQjBPMjJdOiQkanEsYTI3IlpIRGFXWSkzMURvWU9MXiNlbj91QC8sZ2VeZGdJUmlIRzZHYCYyI1t0XztjOUpSXVlxWSZqPEdwLVRyIXFJRCghdS1XXE9qTVAwcytWJEI3aydAaz1rJCFaRTgkMycrKmlFW2wrRHRWUkJMdEBySl11QU9xPC1HNnUsLz9uQlIySDt0Q2IzZ2JRTT8hZ00vSyRBRXA7aXRLLE1oV2drP3BFIy9vZVNgc0tQPylSMWxYMHA9ZiJOUjdcRWY1YFddJ11TMzYtRUp1MCthK2ZnaDVkZzRJR05MWmpYOERfYFZKWiRISWJbay5jclJLS2dbUF9aPFA5MDsuKW1lNE83O1BoPFlHdFJwRSVeJlVMKEI6NlElJ2hDOHNLNTEjbnBHVy9uSEIhUk0jblonTnJSMEpkTShPLzJiLz4mVFJAUUpIaFNyQUtqZGg7V1xOWStEUVVCMUw4LmJdT01PJW5DTHMqOUEqLE5DYSZLOypIdSpRPjY/bkpnaChlT2ljMktzJTs4YjI8R29sIkxCSChoPDZPOCJuT1RIaWkuV0IiTF9ndD9sQGZeNixiZT4qKm9FL0tkX0g1WlJMaCwvI1VmMiteXkYhaTJ0RFdIK2QuJSsnKEo+RC1fIU9ubU1kJFFiZFY+SEI1VmopW2E2NydJPGZKPjk0X04rKHVANjJjMkFPbE0xNWhmQC5FczZVbmpQblsoVSQ6P2AyQHBeRXBkRyFDY0tONW9CSi1NST5kbWUkYDhdPWAuOiZsWTV0PWloK0hPN0A0VzNHOTlQSW4hVCMkKUdhcjJwblxcNWEkOUMlKSFvZlEiITpmQzt1fj5lbmRzdHJlYW0KZW5kb2JqCjEyIDAgb2JqCjw8Ci9GaWx0ZXIgWyAvQVNDSUk4NURlY29kZSAvRmxhdGVEZWNvZGUgXSAvTGVuZ3RoIDMzMzUKPj4Kc3RyZWFtCkdhdWBWPkJlZGwmcTgwMVcwYmNOYmguZyZdJEppN15iTFxOPVtcY0NGN1JiRilWZzBHbGZfZklyOypPXSEmXzcpMkRBWSg2bSwuWT51YjZdb2k0UWZra0pwbXMrYU8nTVwxP0wxcig0ZilNO0k0KDYjRGk0Km1naFtjXDUxMXU0RmhuRT0pMmlCXUFJUWRlQ3Q3ISE1IiNMPi5eY2gkWyYlKiQmc19tL14/XG5sWUslW0tqSGdbTyVsWCM4YCpNO2RDXig9KHQjZDM1WigwO2BedTZhTTBcIThGdD9pbj1rWlZRUT8ka3E7RHU5WihzSGQlJ29QYWhJWDBIW11hQTM8P2MhL0xSLlBicTM5QEovOSZERGplPyVHZF9MQGxPaEJgI15VN24rMjYrZCc4TSthQks7aiZfPDssX0lbOzkxSSZjNDNkXTVjVygxLGgxZ29bcDllWWQvZlNpMjBDQUtkcytjTzR0Lkk8IVNDIy1CXzk8WWRtZ0pxXzIrLCRfWVtZNmg2U0lwPyk/bVRQLVRCbmdEKGsnanMiPSU8KEs8M3JdJm5jPm9oLD5UWTMrVkpyJkonbUxEP1pYTSUpVDEpOz9DcSYmQyZUNjglWXVPVlpMSGY6Z1pMODU/KmRlQWEtPyYtbT9lJCphcic6WWlkWGIkUGZIclVWVjxLKCY9QiZBOmpcQlxeS0FGNDBXJyx1bCs2bDRtTjRpJ2Nuc1JLOkxcSzFXJVVLJmlTcjU0Z0RGLD1wRk5ZJjxPX1MtaCY+cyhEajRDSk5BcGUtJU1BWGJHQlBiWFdRMUllM0RadEVVN0AsYj1LTC89LywjPixAK3VgPGBjUjJQSTI/KGo0Yj4lZjQ/dGhUNlgiR2sqIXRgT0tGWkQyYElxUzNybERDOChHY1dfWG1oU2gzcV8nSVFgVGAyKHRgRzEsTE1XVV5EI1QsZDBcSjdwVCdmcy5GLjhLMV9zIXM0OTs3PVVWImNNZ3QhNlRiLUhAMChYUkVyNVo4KiswcjwuZDpkRFhAZHQ2UVVpOTckXD0nTV8oaDY+bTFBM1ozdVRHPm4yOWI0Vk5wMEFzdVhWJnNPazxHWS0kXTgzR0kxQkQtQ25oUHRORFkqRkFnLyZPIV42W0RyZDE6aVkvMj01UVt0aExjUGxUbVI2Ti1tVHBISV0zNF5pKWRobV1BVEdkRT1RX0kwSlhnSVJpUygmSlMuRHBzNzs6SzJcXzhkT0BMRTUxcGJBJlRuNTE6clYuUGwqWVVJY1ZpR09zLlMpOElUQWNGVVUjXEsobG1VT1NhbSl0Xm0tXCJuTkc8KSZfWSlqYj1zRTJ0YW8xN0ZZL2VeSktSOmFIOTYpNnAhOSNkQWAhIWptKT9mYGlGKSNRWTs6KmpaXmVpSV9dSFVpZEpmPzInQyM2ZCRrJWpNVUNzR00nVENHTWE2LWJPW1tQXDMwTioxaUQ4O2I2QFRcJUJfUE9kb2krLlFfYCpeN0RhKEU1Vmo9TF8tL3RwYThWQGxHRWIzT1FfSVU8P2pVPUlxSSonLmZ0LTFROVM8JEBOUSImN0RgbD1TV0xuZ1ZcIlhhQj4sKGBkSF5uYzw+RmFwUC4tUz5IRmNdJjVXWTdUaTVPcW8lUE9caHQxX2A7MFVnZTBLT1tZR1w3Pj02LUkzdCEtajk5OFlQczNeYkZXXTxxcGtFJidKTnUmP0NYbjIhcSFZLDpcKEdZdSImNjBNKS5fXzMoOitSOi1uLTZgSVZLW2ZZLkZeJSNKbDYyRDpvMCpjciFcL1QxMVlnPGNXZERDdGFhUT9nLCM0MEIhay1RNC8nYV5iLE06Y0cxcllCKSxbLDpHU11VNU0pVDxQXGxpXWo2QzBubjhLLTE+L2Y0W2hLPyM/I1E9KTgjYUtJSGZZNlgxXSdbbnNAMkItY2dYI1k3MiRwaj0sTDNOOkNtKEdIYkhkRyEhWi91I2ZOUUpwPER1RCs2TTNyXGVGSFopUSwmTC8ocU5pQyhcMldGaTN1IUdNbTpAI25HUF4pTSkpb0JIKUV1S1ktbTRuQGBfSEBXSjlAbTJGYzNqRk9ULVgqXTkuMCZPaFhma3Jca0pxS0kvXnFHVElmJyJFaVA7ampvZTREbXVBOlw0Q2s6STdgYSMrWjFHNUExTFA+OUxDJSIzRFA7Q1dCXWc3PjlTKGslKT1CYFxKOzFLZXNIPykrc0ZIU21nS0VfOyYxVGVTXzBzKVk6T2EhK1koJG5LYztoaTphYjZfMFwyIm01L0ZSOmpRJiY6QFRBRjxFZC9OZSdma2g7SFVcSzskOFkhUVQuMChQTXRqQihQVTAwZyZtZDM+TV0oSksqPTszNTA/NF0sQDIyOCk6bSpqSiNgZHA2UTRGIypiLVkkYWctZHUxK0xuYVVTJCpnYlolMm1ZWEVfMT0vMUJYSF8oOF9kPEQ7Kk10OnIuKGVlKU4uRUtNbW9NLiR1O0VATStncnRPayE1bVZFUnRpT0pqISc4MGE9cVgpYTFBRUlJRF9XYW03LllAPFRBOVs5M0RnPDQ9c1YnSStwLCpaSVA/YnE0TWVTQ2ZvSCtoWlJfTmclQVRmVzxncXAhdTI6USJPW0NoVS1fXmBmLy5kLydWY3JZW2ZRXmMlMXN1VkpyalJWOU5dMDspWTtLci80QDtAIUtRT3JYTTA6UjBHWXJFMS8jSz45STBOUDRVajtjPTR1V0NqIlpdLz5FaSQ2UmE9WDY0WCQzUyJkPyMpb1JsMFtVP3NAZVw+J0BrQGdcaVwpP1tZdUBhP1VqPmghLGE3ZkRYNThJIXInO01SUVU8V2xOVF0rVnE3UTsuRFY5S19EZlJqMDVfckEvPGdQTG9lcmZKLkxIP1ZtVSdULydPUiw8KTFSPzskWXItSkBIamFXbmleYjFnclIrJDspWW1KK2RVKzM5IUBINjVmKk9Sby9cV3F0QUw3T29DZDZ1TjddP1J1aXJgWEhkP0xudE85Uj1xbVsrR2hOLms3LFxfZT1kLnRfPnJPRzFbSClcVnI4TkpuOTRFSTpvOHNCYSw8dUYxTzEjXjdWWy89WkFkZklAY2VBJ2BGVy5NN3BBbTNWal1aQm1SRlQ2XTI5PEVFanVcVWtIY1lCPSg5PF9LK25NOSMhXi0ubW1XOz9lP29ZMmQ0ZipWTmVwPSMlO1dncjc4b2VKXzVLZ3U0bE4tJUtAZD5NVWBLT2lrYixwZWYpY1ZuX0RfaUNHJjNbTlh0bzckTG1aK1BLbmZdK2lDViVAcycwSm1CITBNcylRLFhqTlNPaHFESD5pPSMqN2pvZzA5MGwqIzBza1VLRypAUEImLShVJSFvYi8ma19wQ0haZzFlXyUnOD9PKGhKV2otQjoiV1dENk1UZFVpNUc2KXVdNTtYNVlSayJPOVFealwoRnJfSkEkIWNhYzpFWDtGLEVUS1MsdUJdUCI1T10mSmVlbDhXKDxkKTlpZjlQcF8zS2c9bVdRJTtMOTxWTjReLDJYVEU0N1MhUiNMQzVpKitBJ1xEYnInSVEwTzMhX0QlJ2wmTWNANnIzRys1SFtNXmxZcUguJzFcKVI+bitqNz0sXVBiLmcvciE5VTZvOUQnUWZNLlotJ1VfNiYnTUpRVCRzJyYmayVWUSssVCQ2YFVgUUwjcjdcLi8ocThIKm5wYkxEJGYqI1JOPENUWkRoPTNzMmtpR2s4ZTIyb3A4XXQ9Xyk+dWInRlVTOU5QcV4kckBJaiJDXE5mN0MvWzwkR2otbzcxTzRjamRQKj4vIVRqdWNYW2YkOzp1NjsxNE9nQmJiKk0uTklBNT8sLFhCWSVVLWdUO0hvU2srS18lKiUtQ1w0NUxfTXFGNE1PXWRcQyJYRicuMjdaa1NRKW1BbyFybE11UCluPzFNaz5ETCskJ1dhb15Ac0xnZG8/VWNLZDVDTDdRKCk8Lk0sdTQyclU+LDE2YFFRO09LRUFiMUMrKyFFJUZYWXE/XTgpKmFOLUBDQTUzYCc6cCJDcCVIMmxOSjBESmFWTyNEZF9MMzNJQSxnNExpLDNDLSVKOyRFWzdBMklFK15NNkBBZTpQNSpbXCtfamFJcEJIQHNNVzFfJjUhJEVhYTlAKT5iW1FdLHI/RDI5WEFfKWFtL1RkLl9MP0xobmBmO0ghalM7R2JpPiM7P3Mrb09sNlY0c0FDJ0BxQ0Q8aChpLjdSTW0tazw3UUFZMDImUSMpVFUjX1QsTShGJGlocmZuNjRjVVFkQGZCaycwVTAjXlpBSSE/akZfdGJiVVUxJipfJSUvMUBuT3EyXlMnc3ExJGAmUSRXJSIsdUokSzFyLSg0QUx0YDFTKzZnOE8jdTJZPld1V0xHZjo7MVIwKWImOUFmOGtaR2xWP2VmcVU+LFtSYz5uUVNFNVlWXlEpa0VvPl9XJCdGZmM9NCFvXjYmWmhyV2N0L1ZWcX4+ZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgMTMKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDYxIDAwMDAwIG4gCjAwMDAwMDAxMjIgMDAwMDAgbiAKMDAwMDAwMDIyOSAwMDAwMCBuIAowMDAwMDAwMzQxIDAwMDAwIG4gCjAwMDAwMDA0MjQgMDAwMDAgbiAKMDAwMDAwMDYyOSAwMDAwMCBuIAowMDAwMDAwNzQ0IDAwMDAwIG4gCjAwMDAwMDA5NDkgMDAwMDAgbiAKMDAwMDAwMTAxOCAwMDAwMCBuIAowMDAwMDAxMjc5IDAwMDAwIG4gCjAwMDAwMDEzNDUgMDAwMDAgbiAKMDAwMDAwODIzNiAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9JRCAKWzw1YmJjMDc0OGE3MjQ4OTJkMWEwOTY2NzQzZTNkNDhmOD48NWJiYzA3NDhhNzI0ODkyZDFhMDk2Njc0M2UzZDQ4Zjg+XQolIFJlcG9ydExhYiBnZW5lcmF0ZWQgUERGIGRvY3VtZW50IC0tIGRpZ2VzdCAob3BlbnNvdXJjZSkKCi9JbmZvIDkgMCBSCi9Sb290IDggMCBSCi9TaXplIDEzCj4+CnN0YXJ0eHJlZgoxMTY2MwolJUVPRgo=";
+
+    function downloadCV() {
+      const bytes = atob(CV_B64);
+      const arr = new Uint8Array(bytes.length);
+      for (let i = 0; i < bytes.length; i++) arr[i] = bytes.charCodeAt(i);
+      const blob = new Blob([arr], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'Kamwi_Siyauya_CV_2026.pdf';
+      a.click(); URL.revokeObjectURL(url);
+    }
+    document.getElementById('downloadCV').addEventListener('click', downloadCV);
+    document.getElementById('downloadCV2').addEventListener('click', downloadCV);
+
+    // ── Theme toggle
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme') || 'dark';
+    if (saved === 'light') html.setAttribute('data-theme', 'light');
+    themeBtn.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    // ── Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    });
+    function animRing() {
+      rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    }
+    animRing();
+    document.querySelectorAll('a, button, .project-card, .stat-box').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.style.width = '20px'; cursor.style.height = '20px'; ring.style.width = '56px'; ring.style.height = '56px'; });
+      el.addEventListener('mouseleave', () => { cursor.style.width = '10px'; cursor.style.height = '10px'; ring.style.width = '36px'; ring.style.height = '36px'; });
+    });
+
+    // ── Scroll nav
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
+
+    // ── Mobile nav
+    const toggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    // ── Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.exp-item, .project-card').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
