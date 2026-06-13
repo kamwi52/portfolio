@@ -5,87 +5,108 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Kamwi Siyauya — CV (Light)</title>
   <style>
-    :root{--text:#111;--muted:#444;--accent:#b8860b}
-    html,body{margin:0;padding:0;font-family:Arial, Helvetica, sans-serif;color:var(--text);background:#fff}
-    .page{max-width:800px;margin:24px auto;padding:28px}
-    header{display:flex;justify-content:space-between;align-items:flex-start}
-    h1{margin:0;font-size:28px}
-    .meta{font-size:13px;color:var(--muted)}
-    section{margin-top:18px}
-    h2{font-size:14px;margin-bottom:6px;color:var(--accent)}
-    ul{margin:6px 0 0 18px}
-    .col{display:flex;gap:24px}
-    @media print{ .no-print{display:none} }
-    .references{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:8px}
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Fraunces:ital,wght@0,300;0,700;1,300&display=swap');
+    :root{--bg:#ffffff;--panel:#f5f2ec;--text:#111;--muted:#666;--accent:#d4a843}
+    html,body{margin:0;padding:0;font-family:DM Mono, monospace;color:var(--text);background:var(--bg)}
+    .paper{max-width:1000px;margin:18px auto;padding:18px}
+    .cv{display:flex;gap:28px;background:var(--bg)}
+    aside{width:300px;background:var(--panel);padding:22px;border-radius:4px}
+    aside h2{font-family:Syne, sans-serif;margin:0 0 10px;font-size:20px;color:var(--accent)}
+    .name{font-family:Syne, sans-serif;font-size:28px;margin:0;color:#0b0b0b}
+    .role{font-family:Fraunces, serif;color:var(--muted);margin-top:6px}
+    main{flex:1;padding:6px 8px}
+    h3{font-family:Syne, sans-serif;color:var(--accent);margin:4px 0 8px}
+    .muted{color:var(--muted);font-size:13px}
+    .section{margin-bottom:14px}
+    .two{display:flex;gap:18px}
+    ul{margin:6px 0 0 18px;color:var(--muted)}
+    .refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+    .download{margin-top:12px}
+    @media print{ .no-print{display:none} aside{break-inside:avoid} }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <div>
-        <h1>Kamwi Siyauya</h1>
-        <div class="meta">I.T Specialist &amp; Mobile App Architect — Livingstone, Zambia</div>
-      </div>
-      <div style="text-align:right;font-size:13px">
-        <div>+260 97 444 9780</div>
-        <div>kamwisiya@gmail.com</div>
-        <div>https://project-n2h7n.vercel.app</div>
-      </div>
-    </header>
+  <div class="paper">
+    <div id="cv" class="cv">
+      <aside>
+        <div class="name">Kamwi Siyauya</div>
+        <div class="role">I.T Specialist &amp; Mobile App Architect</div>
+        <hr style="border:none;border-top:2px solid var(--accent);margin:12px 0 14px">
+        <div class="muted">Livingstone, Zambia</div>
+        <div class="muted" style="margin-top:8px">+260 97 444 9780<br>kamwisiya@gmail.com<br>project-n2h7n.vercel.app</div>
 
-    <section>
-      <h2>Professional Summary</h2>
-      <p style="color:var(--muted);">Full-stack developer and IT specialist with experience building resilient web and mobile systems for education and fintech in Zambia. Focused on offline-capable architectures, secure integrations, and practical deployments.</p>
-    </section>
-
-    <section>
-      <h2>Experience (Selected)</h2>
-      <div>
-        <strong>ICT Teacher &amp; IT Specialist</strong> — Linda Secondary School · 2016 – Present
-        <p style="color:var(--muted);">Built an Offline School Management System, maintained exam centre infrastructure, and designed institution-grade software solutions.</p>
-      </div>
-    </section>
-
-    <section>
-      <h2>Projects (Selected)</h2>
-      <div class="col">
-        <div style="flex:1">
-          <strong>Payment · Site · Page Creation</strong>
-          <div style="color:var(--muted);font-size:13px">Drupal · JS · Node.js · Tingg v3</div>
-          <p style="color:var(--muted);">Responsive donation page, floating checkout modal, decoupled Node.js microservice for OAuth2 and STK push, encrypted env var secrets, and sandbox test automation.</p>
+        <div style="margin-top:16px">
+          <h3>Education</h3>
+          <div class="muted">B.ICT with Education — Univ. of Zambia (2018–2022)</div>
+          <div class="muted">Diploma IT — Copperbelt Univ. (2013–2015)</div>
+          <div class="muted">Cisco CCNA — Cisco Academy (2015–2016)</div>
         </div>
-        <div style="flex:1">
-          <strong>Loan Management Platform</strong>
-          <div style="color:var(--muted);font-size:13px">Node.js · PostgreSQL · React</div>
+
+        <div style="margin-top:14px">
+          <h3>Skills</h3>
+          <div class="muted">Node.js · React · Kotlin · HTML/CSS/JS · IndexedDB · Networking</div>
         </div>
-      </div>
-    </section>
+      </aside>
 
-    <section>
-      <h2>Education &amp; Certifications</h2>
-      <ul>
-        <li>B.ICT with Education — University of Zambia (2018 – 2022)</li>
-        <li>Diploma in Information Technology — Copperbelt University (2013 – 2015)</li>
-        <li>Cisco CCNA Certification — Cisco Networking Academy (2015 – 2016)</li>
-      </ul>
-    </section>
+      <main>
+        <div class="section">
+          <h3>Professional Summary</h3>
+          <div class="muted">Full-stack developer and IT specialist building resilient web and mobile systems for education and fintech in Zambia. Focused on offline-capable architectures, secure integrations, and practical deployments.</div>
+        </div>
 
-    <section>
-      <h2>Professional References</h2>
-      <div class="references">
-        <div>Ms. H. Mayuni — M.O.E DEBS · +260 977 859 540</div>
-        <div>Mr. Chaloba Wilson — MWATA SECONDARY HEAD · +260 977 694 982</div>
-        <div>Mr. Kalusa A.Z — Linda Secondary Head · +260 979 889 122</div>
-        <div>Mr. J. Chilongu — BICT Coordinator, ZICT College · +260 955 917 410</div>
-        <div>Mr. N. Nkole — Project Supervisor, ZICT College · +260 976 432 745</div>
-        <div>Madan Ann — Kafubu Water IT Dept · +260 977 857 463</div>
-      </div>
-    </section>
+        <div class="section">
+          <h3>Experience (Selected)</h3>
+          <div style="margin-bottom:8px">
+            <strong>ICT Teacher &amp; IT Specialist</strong> — Linda Secondary School · <span class="muted">2016 – Present</span>
+            <div class="muted">Built an Offline School Management System, maintained exam centre infrastructure, and designed institution-grade software solutions.</div>
+          </div>
+        </div>
 
-    <div style="margin-top:18px">
-      <button class="no-print" onclick="window.print()">Save / Print as PDF</button>
-      <a class="no-print" href="index.html" style="margin-left:12px;">Back</a>
+        <div class="section">
+          <h3>Projects (Selected)</h3>
+          <div style="margin-bottom:8px">
+            <strong>Payment · Site · Page Creation</strong>
+            <div class="muted">Drupal · JS · Node.js · Tingg v3</div>
+            <div class="muted">Responsive donation page, floating checkout modal, decoupled Node.js microservice for OAuth2 and STK push, encrypted env var secrets, and sandbox test automation.</div>
+          </div>
+          <div>
+            <strong>Loan Management Platform</strong>
+            <div class="muted">Node.js · PostgreSQL · React</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Professional References</h3>
+          <div class="refs">
+            <div class="muted">Ms. H. Mayuni — M.O.E DEBS · +260 977 859 540</div>
+            <div class="muted">Mr. Chaloba Wilson — MWATA SECONDARY HEAD · +260 977 694 982</div>
+            <div class="muted">Mr. Kalusa A.Z — Linda Secondary Head · +260 979 889 122</div>
+            <div class="muted">Mr. J. Chilongu — BICT Coordinator, ZICT College · +260 955 917 410</div>
+            <div class="muted">Mr. N. Nkole — Project Supervisor, ZICT College · +260 976 432 745</div>
+            <div class="muted">Madan Ann — Kafubu Water IT Dept · +260 977 857 463</div>
+          </div>
+        </div>
+
+        <div class="download no-print">
+          <button id="downloadPdf">Download PDF (Light)</button>
+          <a href="index.html" style="margin-left:12px">Back</a>
+        </div>
+      </main>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script>
+    document.getElementById('downloadPdf').addEventListener('click', () => {
+      const element = document.getElementById('cv');
+      const opt = {
+        margin:       0.4,
+        filename:     'Kamwi_Siyauya_CV_Light.pdf',
+        image:        { type: 'jpeg', quality: 0.95 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    });
+  </script>
 </body>
 </html>
