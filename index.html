@@ -365,6 +365,7 @@
         <button class="btn-primary" id="downloadCV" style="border:none;cursor:none;">
           ⬇ Download CV
         </button>
+        <button class="btn-ghost" id="downloadCVLight" style="border:none;cursor:none;margin-left:8px;">⬇ CV (Light)</button>
         <a href="mailto:kamwisiya@gmail.com" class="btn-ghost">Get In Touch</a>
       </div>
     </div>
@@ -602,6 +603,44 @@
         <a href="tel:+260974449780" class="contact-chip">📞 +260 97 444 9780</a>
         <a href="https://project-n2h7n.vercel.app" target="_blank" class="contact-chip">🌐 Portfolio</a>
         <button class="contact-chip" id="downloadCV2" style="border:1px solid var(--line);background:none;cursor:none;font-family:var(--font-body);letter-spacing:0.1em;text-transform:uppercase;">⬇ Download CV</button>
+        <button class="contact-chip" id="downloadCVLight2" style="border:1px solid var(--line);background:none;cursor:none;font-family:var(--font-body);letter-spacing:0.1em;text-transform:uppercase;">⬇ CV (Light)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFESSIONAL REFERENCES -->
+  <section id="references">
+    <div class="site-wrapper">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2 class="section-title">Professional References</h2>
+        <div class="section-line"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+        <div class="edu-item">
+          <div class="edu-degree">Ms. H. Mayuni</div>
+          <div class="edu-school">M.O.E DEBS · +260 977 859 540</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">Mr. Chaloba Wilson</div>
+          <div class="edu-school">MWATA SECONDARY HEAD · +260 977 694 982</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">Mr. Kalusa A.Z</div>
+          <div class="edu-school">Linda Secondary Head · +260 979 889 122</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">Mr. J. Chilongu</div>
+          <div class="edu-school">BICT Coordinator, ZICT College · +260 955 917 410</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">Mr. N. Nkole</div>
+          <div class="edu-school">Project Supervisor, ZICT College · +260 976 432 745</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">Madan Ann</div>
+          <div class="edu-school">Kafubu Water IT Dept · +260 977 857 463</div>
+        </div>
       </div>
     </div>
   </section>
@@ -631,6 +670,27 @@
     }
     document.getElementById('downloadCV').addEventListener('click', downloadCV);
     document.getElementById('downloadCV2').addEventListener('click', downloadCV);
+
+    // ── Light / print-friendly CV (opens a light-themed printable window)
+    function downloadCVLight() {
+      const bodyHTML = document.body.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '');
+      const lightStyle = `
+        html,body{background:#fff;color:#111;font-family:var(--font-body,monospace);}
+        .site-wrapper{max-width:840px;margin:0 auto;padding:24px}
+        nav,.cursor,.cursor-ring,.theme-toggle,.nav-toggle,.project-arrow{display:none !important}
+        *{background:transparent !important;color:inherit !important;border-color:#ddd !important}
+        a{color:#0b5; text-decoration:none}
+      `;
+      const doc = `<!doctype html><html><head><meta charset="utf-8"><title>Kamwi Siyauya — CV (Light)</title><style>${lightStyle}</style></head><body>${bodyHTML}</body></html>`;
+      const w = window.open('', '_blank');
+      w.document.open();
+      w.document.write(doc);
+      w.document.close();
+      w.focus();
+      setTimeout(() => { try { w.print(); } catch (e) { console.warn(e); } }, 600);
+    }
+    document.getElementById('downloadCVLight').addEventListener('click', downloadCVLight);
+    document.getElementById('downloadCVLight2').addEventListener('click', downloadCVLight);
 
     // ── Theme toggle
     const html = document.documentElement;
