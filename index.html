@@ -453,6 +453,7 @@
       </div>
       <div class="projects-grid">
 
+        <a href="project-payment.html" class="project-link" style="text-decoration:none;color:inherit;">
         <div class="project-card">
           <span class="project-badge featured">Fintech</span>
           <span class="project-icon">💳</span>
@@ -461,6 +462,7 @@
           <p class="project-desc">Responsive donation page and decoupled Node.js microservice integrating Tingg Checkout v3 (OAuth2, STK push); secured credentials with encrypted env vars and automated sandbox tests.</p>
           <div class="project-arrow">→</div>
         </div>
+        </a>
 
         <div class="project-card">
           <span class="project-badge featured">Featured</span>
@@ -673,21 +675,7 @@
 
     // ── Light / print-friendly CV (opens a light-themed printable window)
     function downloadCVLight() {
-      const bodyHTML = document.body.innerHTML.replace(/<script[\s\S]*?<\/script>/gi, '');
-      const lightStyle = `
-        html,body{background:#fff;color:#111;font-family:var(--font-body,monospace);}
-        .site-wrapper{max-width:840px;margin:0 auto;padding:24px}
-        nav,.cursor,.cursor-ring,.theme-toggle,.nav-toggle,.project-arrow{display:none !important}
-        *{background:transparent !important;color:inherit !important;border-color:#ddd !important}
-        a{color:#0b5; text-decoration:none}
-      `;
-      const doc = `<!doctype html><html><head><meta charset="utf-8"><title>Kamwi Siyauya — CV (Light)</title><style>${lightStyle}</style></head><body>${bodyHTML}</body></html>`;
-      const w = window.open('', '_blank');
-      w.document.open();
-      w.document.write(doc);
-      w.document.close();
-      w.focus();
-      setTimeout(() => { try { w.print(); } catch (e) { console.warn(e); } }, 600);
+      window.open('cv-light.html', '_blank');
     }
     document.getElementById('downloadCVLight').addEventListener('click', downloadCVLight);
     document.getElementById('downloadCVLight2').addEventListener('click', downloadCVLight);
