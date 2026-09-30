@@ -1,742 +1,878 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kamwi Siyauya — IT Specialist & Mobile App Architect</title>
+  <title>Kamwi Siyauya — Senior Full-Stack Developer & Mobile App Architect</title>
+  <meta name="description" content="Portfolio of Kamwi Siyauya — Senior Full-Stack Developer, Mobile App Architect (Android/Kotlin), and IT Specialist based in Livingstone, Zambia. Building resilient fintech, offline-first edtech, and enterprise cloud solutions." />
+  <meta name="keywords" content="Kamwi Siyauya, Android Developer, Kotlin, Full-Stack Developer, Next.js, React, Node.js, Fintech, Tingg v3, Zambia IT Specialist, CCNA" />
+  <meta name="author" content="Kamwi Siyauya" />
+  
+  <meta property="og:title" content="Kamwi Siyauya — Senior Full-Stack Developer & Mobile App Architect" />
+  <meta property="og:description" content="Building resilient fintech, offline-first edtech, and enterprise mobile/web architectures." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://project-n2h7n.vercel.app" />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Syne, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Fraunces:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #1b2116;
-      --bg2: #22291c;
-      --bg3: #2a3323;
-      --gold: #d4a843;
-      --gold-dim: #9a7830;
-      --gold-glow: rgba(212,168,67,0.15);
-      --teal: #3ecfb2;
-      --text: #e8e4dc;
-      --text-dim: #8a8680;
-      --text-mid: #bbb6ae;
-      --line: rgba(212,168,67,0.18);
-      --toggle-bg: #1a1e28;
-      --font-head: 'Syne', sans-serif;
-      --font-body: 'DM Mono', monospace;
-      --font-serif: 'Fraunces', serif;
-    }
-    [data-theme="light"] {
-      --bg: #f5f2ec;
-      --bg2: #ede9e0;
-      --bg3: #e4dfd4;
-      --gold: #b8860b;
-      --gold-dim: #8a6508;
-      --gold-glow: rgba(184,134,11,0.12);
-      --teal: #1a8c78;
-      --text: #1a1612;
-      --text-dim: #6b6560;
-      --text-mid: #4a4540;
-      --line: rgba(184,134,11,0.22);
-      --toggle-bg: #ddd8ce;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    ::selection { background: var(--gold); color: var(--bg); }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 14px;
-      line-height: 1.7;
-      overflow-x: hidden;
-      cursor: none;
-      transition: background 0.4s, color 0.4s;
-    }
-    .cursor {
-      position: fixed; width: 10px; height: 10px;
-      background: var(--gold); border-radius: 50%;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: width 0.2s, height 0.2s;
-      mix-blend-mode: difference;
-    }
-    .cursor-ring {
-      position: fixed; width: 36px; height: 36px;
-      border: 1px solid rgba(212,168,67,0.5); border-radius: 50%;
-      pointer-events: none; z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: width 0.3s, height 0.3s;
-    }
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 1000; opacity: 0.4;
-    }
-    .site-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 20px 40px;
-      display: flex; justify-content: space-between; align-items: center;
-      transition: background 0.3s, padding 0.3s;
-    }
-    nav.scrolled {
-      background: rgba(27, 33, 22, 0.92);
-      backdrop-filter: blur(12px);
-      padding: 14px 40px;
-      border-bottom: 1px solid var(--line);
-    }
-    [data-theme="light"] nav.scrolled { background: rgba(245,242,236,0.92); }
-    .nav-logo {
-      font-family: var(--font-head); font-weight: 800; font-size: 18px;
-      color: var(--text); letter-spacing: -0.02em; text-decoration: none;
-    }
-    .nav-logo span { color: var(--gold); }
-    .nav-right { display: flex; align-items: center; gap: 32px; }
-    .nav-links { display: flex; gap: 40px; list-style: none; }
-    .nav-links a {
-      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--text-dim); text-decoration: none; transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-
-    /* Theme toggle */
-    .theme-toggle {
-      width: 44px; height: 24px; background: var(--toggle-bg);
-      border-radius: 12px; border: 1px solid var(--line);
-      cursor: none; position: relative; transition: background 0.3s;
-      flex-shrink: 0;
-    }
-    .theme-toggle::after {
-      content: ''; position: absolute;
-      width: 16px; height: 16px; border-radius: 50%;
-      background: var(--gold); top: 3px; left: 3px;
-      transition: transform 0.3s;
-    }
-    [data-theme="light"] .theme-toggle::after { transform: translateX(20px); }
-    .toggle-icons { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 5px; pointer-events: none; font-size: 10px; }
-
-    .nav-toggle {
-      display: none; flex-direction: column; gap: 5px;
-      cursor: none; background: none; border: none; padding: 4px;
-    }
-    .nav-toggle span { width: 22px; height: 1px; background: var(--text); transition: 0.3s; }
-
-    /* ─── HERO ─── */
-    header {
-      position: relative; min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 60px 0 80px; overflow: hidden;
-    }
-    .header-grid-lines {
-      position: absolute; inset: 0;
-      background-image: linear-gradient(to right, var(--line) 1px, transparent 1px), linear-gradient(to bottom, var(--line) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%);
-      pointer-events: none;
-    }
-    .hero-label {
-      font-family: var(--font-body); font-size: 11px; letter-spacing: 0.25em;
-      text-transform: uppercase; color: var(--gold); margin-bottom: 28px;
-      display: flex; align-items: center; gap: 16px;
-      opacity: 0; animation: fadeUp 0.7s 0.2s ease forwards;
-    }
-    .hero-label::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
-    .hero-name {
-      font-family: var(--font-head); font-weight: 800;
-      font-size: clamp(52px, 8vw, 110px); line-height: 0.92;
-      letter-spacing: -0.03em; color: var(--text);
-      opacity: 0; animation: fadeUp 0.8s 0.35s ease forwards;
-    }
-    .hero-name span { display: block; color: var(--gold); }
-    .hero-tagline {
-      font-family: var(--font-serif); font-style: italic; font-weight: 300;
-      font-size: clamp(18px, 2.5vw, 26px); color: var(--text-mid);
-      margin-top: 28px; max-width: 560px;
-      opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards;
-    }
-    .hero-meta {
-      display: flex; flex-wrap: wrap; gap: 32px; margin-top: 48px;
-      opacity: 0; animation: fadeUp 0.8s 0.65s ease forwards;
-    }
-    .meta-item { display: flex; flex-direction: column; gap: 4px; }
-    .meta-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
-    .meta-value { font-size: 13px; color: var(--text); }
-    .meta-value a { color: var(--gold); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.2s; }
-    .meta-value a:hover { border-color: var(--gold); }
-    .hero-cta {
-      display: flex; gap: 16px; margin-top: 52px;
-      opacity: 0; animation: fadeUp 0.8s 0.8s ease forwards;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em;
-      text-transform: uppercase; text-decoration: none;
-      background: var(--gold); color: #0a0c10;
-      padding: 14px 32px; display: inline-flex; align-items: center; gap: 8px;
-      font-weight: 400; transition: background 0.2s, transform 0.2s;
-    }
-    .btn-primary:hover { background: #e8bc55; transform: translateY(-2px); }
-    .btn-ghost {
-      font-family: var(--font-body); font-size: 12px; letter-spacing: 0.1em;
-      text-transform: uppercase; text-decoration: none;
-      border: 1px solid var(--gold-dim); color: var(--text-mid);
-      padding: 14px 32px; display: inline-flex; align-items: center; gap: 8px;
-      transition: 0.2s;
-    }
-    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
-    .scroll-hint {
-      position: absolute; bottom: 40px; right: 0;
-      display: flex; align-items: center; gap: 10px; font-size: 10px;
-      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim);
-      writing-mode: vertical-rl; animation: fadeIn 1s 1.2s ease both;
-    }
-    .scroll-line {
-      width: 1px; height: 60px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: growLine 1.5s 1.5s ease forwards;
-      transform-origin: top; transform: scaleY(0);
-    }
-
-    /* ─── SECTIONS ─── */
-    section { padding: 100px 0; }
-    .section-header { display: flex; align-items: baseline; gap: 24px; margin-bottom: 64px; }
-    .section-num { font-family: var(--font-body); font-size: 11px; color: var(--gold); letter-spacing: 0.15em; }
-    .section-title { font-family: var(--font-head); font-weight: 700; font-size: clamp(28px, 4vw, 48px); letter-spacing: -0.02em; color: var(--text); }
-    .section-line { flex: 1; height: 1px; background: var(--line); }
-
-    /* ─── ABOUT ─── */
-    #about { background: var(--bg2); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .about-text p { font-family: var(--font-serif); font-weight: 300; font-size: 18px; line-height: 1.7; color: var(--text-mid); margin-bottom: 20px; }
-    .about-text p strong { color: var(--text); font-weight: 700; }
-    .about-text p em { color: var(--gold); }
-    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-    .stat-box { background: var(--bg3); padding: 32px 28px; border-top: 2px solid transparent; transition: border-color 0.3s; }
-    .stat-box:hover { border-color: var(--gold); }
-    .stat-num { font-family: var(--font-head); font-weight: 800; font-size: 42px; color: var(--gold); line-height: 1; }
-    .stat-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-top: 8px; }
-
-    /* ─── EXPERIENCE ─── */
-    #experience { background: var(--bg); }
-    .exp-item { display: grid; grid-template-columns: 220px 1fr; gap: 48px; padding: 48px 0; border-bottom: 1px solid var(--line); opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
-    .exp-item.visible { opacity: 1; transform: translateY(0); }
-    .exp-period { font-size: 11px; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; }
-    .exp-org { font-size: 11px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
-    .exp-role { font-family: var(--font-head); font-weight: 700; font-size: 22px; color: var(--text); margin-bottom: 16px; }
-    .exp-desc { color: var(--text-mid); font-size: 13px; line-height: 1.8; }
-    .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-    .tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--line); color: var(--text-dim); padding: 5px 12px; transition: 0.2s; }
-    .tag:hover { border-color: var(--gold-dim); color: var(--gold); }
-
-    /* ─── PROJECTS ─── */
-    #projects { background: var(--bg2); }
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2px; }
-    .project-card {
-      background: var(--bg3); padding: 40px 36px;
-      position: relative; overflow: hidden; cursor: none;
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.6s, transform 0.6s, background 0.3s;
-    }
-    .project-card.visible { opacity: 1; transform: translateY(0); }
-    .project-card:hover { background: var(--bg2); }
-    .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.4s; }
-    .project-card:hover::before { width: 100%; }
-    .project-badge {
-      display: inline-block; font-size: 9px; letter-spacing: 0.15em;
-      text-transform: uppercase; padding: 3px 10px; margin-bottom: 18px;
-      border: 1px solid var(--line); color: var(--text-dim);
-    }
-    .project-badge.featured { border-color: var(--gold-dim); color: var(--gold); background: var(--gold-glow); }
-    .project-icon { font-size: 28px; margin-bottom: 18px; display: block; }
-    .project-title { font-family: var(--font-head); font-weight: 700; font-size: 20px; color: var(--text); margin-bottom: 12px; line-height: 1.2; }
-    .project-stack { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 16px; }
-    .project-desc { font-size: 13px; color: var(--text-dim); line-height: 1.8; }
-    .project-arrow { position: absolute; bottom: 36px; right: 36px; width: 36px; height: 36px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-size: 16px; transform: translateX(-6px); opacity: 0; transition: 0.3s; }
-    .project-card:hover .project-arrow { transform: translateX(0); opacity: 1; border-color: var(--gold); color: var(--gold); }
-
-    /* ─── SKILLS ─── */
-    #skills { background: var(--bg); }
-    .skills-outer { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-    .skill-group { margin-bottom: 40px; }
-    .skill-group-title { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
-    .skill-list { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
-    .skill-list li { font-size: 12px; background: var(--bg3); color: var(--text-mid); padding: 8px 16px; border-left: 2px solid transparent; transition: 0.2s; }
-    .skill-list li:hover { border-color: var(--gold); color: var(--text); }
-    .skills-right { display: flex; flex-direction: column; justify-content: center; }
-    .skills-quote { font-family: var(--font-serif); font-style: italic; font-size: 22px; font-weight: 300; color: var(--text-mid); line-height: 1.6; border-left: 3px solid var(--gold); padding-left: 28px; margin-bottom: 40px; }
-    .edu-item { padding: 20px 0; border-bottom: 1px solid var(--line); }
-    .edu-degree { font-family: var(--font-head); font-weight: 600; font-size: 15px; color: var(--text); }
-    .edu-school { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
-
-    /* ─── CONTACT ─── */
-    #contact { background: var(--bg2); text-align: center; position: relative; overflow: hidden; }
-    #contact::before {
-      content: 'HIRE'; position: absolute;
-      font-family: var(--font-head); font-weight: 800;
-      font-size: clamp(120px, 25vw, 320px); color: transparent;
-      -webkit-text-stroke: 1px rgba(212,168,67,0.06);
-      left: 50%; top: 50%; transform: translate(-50%, -50%);
-      pointer-events: none; letter-spacing: -0.04em; white-space: nowrap;
-    }
-    .contact-headline { font-family: var(--font-head); font-weight: 800; font-size: clamp(36px, 6vw, 80px); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 28px; color: var(--text); position: relative; }
-    .contact-sub { font-size: 14px; color: var(--text-dim); max-width: 440px; margin: 0 auto 48px; position: relative; }
-    .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; position: relative; }
-    .contact-chip { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--text-mid); border: 1px solid var(--line); padding: 12px 28px; transition: 0.2s; }
-    .contact-chip:hover { background: var(--gold-glow); border-color: var(--gold); color: var(--gold); }
-
-    footer { background: var(--bg); padding: 32px 0; border-top: 1px solid var(--line); }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-    .footer-logo { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--gold); }
-    .footer-copy { font-size: 11px; color: var(--text-dim); }
-
-    @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-    @keyframes growLine { to { transform: scaleY(1); } }
-
-    @media (max-width: 768px) {
-      .site-wrapper { padding: 0 20px; }
-      nav { padding: 16px 20px; }
-      nav.scrolled { padding: 12px 20px; }
-      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(27, 33, 22, 0.97); padding: 20px; gap: 24px; border-bottom: 1px solid var(--line); }
-      .nav-links.open { display: flex; }
-      .nav-toggle { display: flex; }
-      .about-grid, .skills-outer { grid-template-columns: 1fr; gap: 40px; }
-      .exp-item { grid-template-columns: 1fr; gap: 12px; }
-      .about-stats { grid-template-columns: 1fr 1fr; }
-      .hero-cta { flex-direction: column; }
-      .btn-primary, .btn-ghost { text-align: center; justify-content: center; }
-      .scroll-hint { display: none; }
-      .nav-right { gap: 16px; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
 
-  <nav id="navbar">
-    <a href="#" class="nav-logo">K<span>.</span>S</a>
-    <div class="nav-right">
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <span class="toggle-icons"><span>🌙</span><span>☀️</span></span>
-      </button>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress"></div>
 
-  <header>
-    <div class="header-grid-lines"></div>
-    <div class="site-wrapper" style="position:relative;z-index:2;">
-      <p class="hero-label">IT Specialist — Livingstone, Zambia</p>
-      <h1 class="hero-name">Kamwi<span>Siyauya</span></h1>
-      <p class="hero-tagline">Building resilient digital systems for education &amp; fintech across Zambia.</p>
-      <div class="hero-meta">
-        <div class="meta-item">
-          <span class="meta-label">Phone</span>
-          <span class="meta-value"><a href="tel:+260974449780">+260 97 444 9780</a></span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Email</span>
-          <span class="meta-value"><a href="mailto:kamwisiya@gmail.com">kamwisiya@gmail.com</a></span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Portfolio</span>
-          <span class="meta-value"><a href="https://project-n2h7n.vercel.app" target="_blank">project-n2h7n.vercel.app</a></span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">NRC</span>
-          <span class="meta-value">250189/71/1</span>
+  <!-- Background Ambient Glows & Grid Mesh -->
+  <div class="ambient-bg">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="navbar-container" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#hero" class="brand-logo">
+          <div class="brand-badge">KS</div>
+          <div class="brand-name">Kamwi <span>Siyauya</span></div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#skills" class="nav-link">Architecture &amp; Skills</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#credentials" class="nav-link">Education &amp; Refs</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+
+        <!-- Action Items (Theme Toggle, CV, Mobile Hamburger) -->
+        <div class="nav-actions">
+          <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme" aria-label="Toggle Theme">
+            <svg class="theme-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg class="theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+
+          <div class="cv-dropdown-wrapper">
+            <button class="btn-nav-cta">
+              <span>Download CV</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="cv-menu">
+              <a href="cv-dark.html" target="_blank" class="cv-menu-item">
+                <span>🌙</span> Executive CV (Dark Theme)
+              </a>
+              <a href="cv-light.html" target="_blank" class="cv-menu-item">
+                <span>🖨️</span> Printable CV (Light Theme)
+              </a>
+            </div>
+          </div>
+
+          <button class="mobile-menu-btn" id="mobileMenuOpen" aria-label="Open Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
         </div>
       </div>
-      <div class="hero-cta">
-        <a href="#projects" class="btn-primary">View My Work</a>
-        <button class="btn-primary" id="downloadCV" style="border:none;cursor:none;">
-          ⬇ Download CV
-        </button>
-        <button class="btn-ghost" id="downloadCVLight" style="border:none;cursor:none;margin-left:8px;">⬇ CV (Light)</button>
-        <a href="mailto:kamwisiya@gmail.com" class="btn-ghost">Get In Touch</a>
-      </div>
-    </div>
-    <div class="scroll-hint site-wrapper" style="position:absolute;right:40px;bottom:40px;width:auto;">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
     </div>
   </header>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="site-wrapper">
-      <div class="section-header">
-        <span class="section-num">01</span>
-        <h2 class="section-title">About</h2>
-        <div class="section-line"></div>
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <div class="brand-logo">
+        <div class="brand-badge">KS</div>
+        <div class="brand-name">Kamwi <span>Siyauya</span></div>
       </div>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>I'm a <strong>full-stack developer and IT specialist</strong> based in Livingstone, Zambia, with over <em>9 years</em> of institutional technology experience at Linda Secondary School under the Ministry of Education.</p>
-          <p>I specialize in building <strong>zero-cost, offline-capable systems</strong> tailored for Zambian institutions — from school management platforms to fintech lending apps — using modern web and mobile technologies.</p>
-          <p>My approach bridges <strong>education technology and software engineering</strong>: I architect solutions that work in low-connectivity environments, replacing manual workflows with automated, data-driven systems.</p>
-        </div>
-        <div class="about-stats">
-          <div class="stat-box"><div class="stat-num">9+</div><div class="stat-label">Years in Education IT</div></div>
-          <div class="stat-box"><div class="stat-num">10+</div><div class="stat-label">Systems Deployed</div></div>
-          <div class="stat-box"><div class="stat-num">B.ICT</div><div class="stat-label">Univ. of Zambia</div></div>
-          <div class="stat-box"><div class="stat-num">CCNA</div><div class="stat-label">Cisco Certified</div></div>
-        </div>
-      </div>
+      <button class="mobile-menu-btn" id="mobileMenuClose" aria-label="Close Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
     </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="site-wrapper">
-      <div class="section-header">
-        <span class="section-num">02</span>
-        <h2 class="section-title">Experience</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">2016 — Present</div>
-          <div class="exp-org">Ministry of Education<br>Linda Secondary School<br>Livingstone, Zambia</div>
-        </div>
-        <div>
-          <h3 class="exp-role">ICT Teacher &amp; IT Specialist</h3>
-          <p class="exp-desc">Administer institutional data systems as School Planning Officer. Built and deployed an Offline School Management System using Vanilla JS and IndexedDB ensuring 100% uptime in low-connectivity environments. Maintain hardware and network infrastructure for national examination centers. Design and deliver Computer Studies curriculum for Grade 9 and Grade 12 learners.</p>
-          <div class="exp-tags"><span class="tag">JavaScript</span><span class="tag">IndexedDB</span><span class="tag">Network Admin</span><span class="tag">Education</span><span class="tag">System Admin</span></div>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">2011 &amp; 2016</div>
-          <div class="exp-org">Electoral Commission<br>of Zambia</div>
-        </div>
-        <div>
-          <h3 class="exp-role">Verification Inspection Officer</h3>
-          <p class="exp-desc">Audited registration databases and ensured data integrity for the national voters' register during two election cycles. Conducted field verification of voter information and applied systematic database audit processes.</p>
-          <div class="exp-tags"><span class="tag">Data Integrity</span><span class="tag">Database Auditing</span><span class="tag">Field Operations</span></div>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">Prior</div>
-          <div class="exp-org">Kafubu Water &amp;<br>Sewerage Company</div>
-        </div>
-        <div>
-          <h3 class="exp-role">IT Technician Intern</h3>
-          <p class="exp-desc">Gained foundational professional experience in enterprise IT operations, hardware maintenance, and network infrastructure within a utility company environment.</p>
-          <div class="exp-tags"><span class="tag">Hardware</span><span class="tag">Networking</span><span class="tag">IT Support</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="site-wrapper">
-      <div class="section-header">
-        <span class="section-num">03</span>
-        <h2 class="section-title">Projects</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="projects-grid">
-
-        <a href="project-payment.html" class="project-link" style="text-decoration:none;color:inherit;">
-        <div class="project-card">
-          <span class="project-badge featured">Fintech</span>
-          <span class="project-icon">💳</span>
-          <div class="project-title">Payment · Site · Page Creation</div>
-          <div class="project-stack">Drupal · JS · Node.js · Tingg v3</div>
-          <p class="project-desc">Responsive donation page and decoupled Node.js microservice integrating Tingg Checkout v3 (OAuth2, STK push); secured credentials with encrypted env vars and automated sandbox tests.</p>
-          <div class="project-arrow">→</div>
-        </div>
+    <ul class="drawer-links">
+      <li><a href="#about" class="drawer-link" onclick="closeDrawer()">About</a></li>
+      <li><a href="#projects" class="drawer-link" onclick="closeDrawer()">Projects</a></li>
+      <li><a href="#skills" class="drawer-link" onclick="closeDrawer()">Architecture &amp; Skills</a></li>
+      <li><a href="#experience" class="drawer-link" onclick="closeDrawer()">Experience</a></li>
+      <li><a href="#credentials" class="drawer-link" onclick="closeDrawer()">Education &amp; References</a></li>
+      <li><a href="#contact" class="drawer-link" onclick="closeDrawer()">Contact</a></li>
+      <li style="margin-top:20px;">
+        <a href="cv-dark.html" target="_blank" class="btn-primary" style="justify-content:center;">
+          <span>Download CV (PDF)</span>
         </a>
+      </li>
+    </ul>
+  </div>
 
-        <a href="project-realestate.html" class="project-link" style="text-decoration:none;color:inherit;">
-        <div class="project-card">
-          <span class="project-badge featured">Featured</span>
-          <span class="project-icon">🏠</span>
-          <div class="project-title">Livingstone Real Estate Platform</div>
-          <div class="project-stack">Kotlin · MVVM · Clean Architecture · Supabase · Drive API</div>
-          <p class="project-desc">Production-ready Android rental app following SOLID principles. MVVM with StateFlow for reactive UI, Clean Architecture layers (Domain/Data/UI), and custom Google Drive proxy as cost-free media hosting.</p>
-          <div class="project-arrow">→</div>
-        </div>
-        </a>
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-layout">
+          <!-- Hero Text Content -->
+          <div class="hero-text-col">
+            <div class="hero-status-pill">
+              <span class="pulse-dot"></span>
+              <span>Available for Engineering Roles &amp; High-Impact Contracts</span>
+            </div>
+            
+            <h1 class="hero-title">
+              Architecting <span class="gradient-text">Resilient Systems</span>, Fintech &amp; Production Apps.
+            </h1>
 
+            <p class="hero-subtitle">
+              Hi, I’m <strong>Kamwi Siyauya</strong> — Senior Full-Stack Developer, Mobile App Architect (Android/Kotlin), and Certified Network Specialist based in Livingstone, Zambia. I engineer zero-downtime, offline-first platforms and high-volume payment microservices.
+            </p>
 
+            <div class="hero-actions">
+              <a href="#projects" class="btn-primary">
+                <span>Explore Featured Work</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <div class="cv-dropdown-wrapper">
+                <button class="btn-secondary">
+                  <span>⬇️ Get Resume / CV</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="cv-menu">
+                  <a href="cv-dark.html" target="_blank" class="cv-menu-item">
+                    <span>🌙</span> Executive CV (Dark Theme)
+                  </a>
+                  <a href="cv-light.html" target="_blank" class="cv-menu-item">
+                    <span>🖨️</span> Printable CV (Light Theme)
+                  </a>
+                </div>
+              </div>
+            </div>
 
-        <a href="project-results.html" class="project-link" style="text-decoration:none;color:inherit;">
-        <div class="project-card">
-          <span class="project-badge">Education</span>
-          <span class="project-icon">🏫</span>
-          <div class="project-title">Linda Secondary Results Portal</div>
-          <div class="project-stack">Next.js 14 · TypeScript · Google OAuth · jsPDF</div>
-          <p class="project-desc">Role-based portal for teachers and students with automated PDF report generation, Google Drive cloud sync, and secure OAuth authentication.</p>
-          <div class="project-arrow">→</div>
-        </div>
-        </a>
-
-        <a href="project-offline.html" class="project-link" style="text-decoration:none;color:inherit;">
-        <div class="project-card">
-          <span class="project-badge">Education</span>
-          <span class="project-icon">🖥️</span>
-          <div class="project-title">Offline School Management System</div>
-          <div class="project-stack">Vanilla JS · IndexedDB · HTML · CSS</div>
-          <p class="project-desc">Single-file browser-based SMS for 100% uptime in low-connectivity Zambian schools. Timetabling for 32 classes and 67 teachers — no server dependency whatsoever.</p>
-          <div class="project-arrow">→</div>
-        </div>
-        </a>
-
-        <a href="project-loan.html" class="project-link" style="text-decoration:none;color:inherit;">
-        <div class="project-card">
-          <span class="project-badge">Fintech</span>
-          <span class="project-icon">🏦</span>
-          <div class="project-title">Loan Management Platform</div>
-          <div class="project-stack">Node.js · PostgreSQL · React · Kotlin Android · WebSockets</div>
-          <p class="project-desc">Full-stack loan management system with real-time WebSocket sync, RBAC access control, and a companion Android app — architected for Zambian microfinance institutions.</p>
-          <div class="project-arrow">→</div>
-        </div>
-        </a>
-
-        <a href="project-zedit.html" class="project-link" style="text-decoration:none;color:inherit;">
-        <div class="project-card">
-          <span class="project-badge">Education</span>
-          <span class="project-icon">📚</span>
-          <div class="project-title">ZedIT Class eLearning Platform</div>
-          <div class="project-stack">PHP · JavaScript · CSV Class Tools</div>
-          <p class="project-desc">Interactive learning portal for Computer Studies with Grade 9 &amp; 12 study dashboards, exam prep tools, and curriculum-aligned content delivery.</p>
-          <div class="project-arrow">→</div>
-        </div>
-        </a>
-
-        <a href="project-devcoach.html" class="project-link" style="text-decoration:none;color:inherit;">
-        <div class="project-card">
-          <span class="project-badge">Android</span>
-          <span class="project-icon">📱</span>
-          <div class="project-title">DevCoach Android App</div>
-          <div class="project-stack">Kotlin · MVVM · WebView · AI Integration</div>
-          <p class="project-desc">Learning companion for developers with AI browser via WebView, schedule-based push notifications, and curriculum maps across React, Next.js, Node.js, and Android MVVM.</p>
-          <div class="project-arrow">→</div>
-        </div>
-        </a>
-
-        <a href="project-narty.html" class="project-link" style="text-decoration:none;color:inherit;">
-        <div class="project-card">
-          <span class="project-badge">School Admin</span>
-          <span class="project-icon">🎓</span>
-          <div class="project-title">Narty Rock School Portal</div>
-          <div class="project-stack">Next.js 14 · React · RBAC · Google Drive</div>
-          <p class="project-desc">Full school portal with Report Card Generator, Announcements Board, and Homework Publisher. Role-based access for Admin, Teacher, and Student roles — navy-and-gold branded.</p>
-          <div class="project-arrow">→</div>
-        </div>
-        </a>
-
-        <a href="project-acetech.html" class="project-link" style="text-decoration:none;color:inherit;">
-        <div class="project-card">
-          <span class="project-badge">Tools</span>
-          <span class="project-icon">📊</span>
-          <div class="project-title">Ace Tech Solutions Website</div>
-          <div class="project-stack">HTML · CSS · JS · Formspree · Mobile Money</div>
-          <p class="project-desc">Business site for Ace Tech Solutions covering all service offerings, MTN and Airtel Mobile Money payment instructions, and Formspree contact integration — single-file, zero hosting cost.</p>
-          <div class="project-arrow">→</div>
-        </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="site-wrapper">
-      <div class="section-header">
-        <span class="section-num">04</span>
-        <h2 class="section-title">Skills</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="skills-outer">
-        <div>
-          <div class="skill-group">
-            <div class="skill-group-title">Mobile &amp; Frontend</div>
-            <ul class="skill-list">
-              <li>Android (Kotlin)</li><li>MVVM Architecture</li><li>Clean Architecture</li>
-              <li>React</li><li>Next.js</li><li>TypeScript</li><li>Vite</li>
-              <li>Tailwind CSS</li><li>HTML / CSS / JS</li>
-            </ul>
+            <!-- Quick Contacts Row -->
+            <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center;">
+              <button onclick="copyToClipboard('kamwisiya@gmail.com', 'Email copied!')" class="tag-badge" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
+                <span>✉</span> kamwisiya@gmail.com
+              </button>
+              <button onclick="copyToClipboard('+260974449780', 'Phone number copied!')" class="tag-badge" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
+                <span>📞</span> +260 97 444 9780
+              </button>
+              <span class="tag-badge" style="color:var(--text-muted);">📍 Livingstone, Zambia</span>
+            </div>
           </div>
-          <div class="skill-group">
-            <div class="skill-group-title">Backend &amp; Data</div>
-            <ul class="skill-list">
-              <li>Node.js</li><li>Express.js</li><li>PHP</li>
-              <li>SQL / NoSQL</li><li>Google Sheets API</li><li>Google Drive API</li>
-              <li>Supabase</li><li>PostgreSQL</li><li>IndexedDB</li>
-            </ul>
-          </div>
-          <div class="skill-group">
-            <div class="skill-group-title">Infrastructure &amp; Tools</div>
-            <ul class="skill-list">
-              <li>Cisco CCNA</li><li>Linux</li><li>Network Security</li>
-              <li>Netlify / Vercel</li><li>Git / GitHub</li><li>Redux Toolkit</li><li>WebSockets</li>
-            </ul>
-          </div>
-        </div>
-        <div class="skills-right">
-          <p class="skills-quote">"I build systems that work in the real Zambia — offline-first, zero-cost, and built to last."</p>
-          <div class="edu-item">
-            <div class="edu-degree">B.ICT with Education — Credit</div>
-            <div class="edu-school">University of Zambia · 2018 – 2022</div>
-          </div>
-          <div class="edu-item">
-            <div class="edu-degree">Diploma in Information Technology</div>
-            <div class="edu-school">Copperbelt University · 2013 – 2015</div>
-          </div>
-          <div class="edu-item">
-            <div class="edu-degree">Cisco CCNA Certification</div>
-            <div class="edu-school">Cisco Networking Academy · 2015 – 2016</div>
+
+          <!-- Hero Bento Highlights -->
+          <div class="hero-bento-grid">
+            <div class="bento-card">
+              <div class="bento-card-header">
+                <div class="bento-icon-box">⚡</div>
+                <span class="tag-badge">Experience</span>
+              </div>
+              <div class="bento-stat">8+</div>
+              <div class="bento-title">Years Engineering</div>
+              <p class="bento-desc">Full-cycle system design, institutional data operations, and enterprise software delivery.</p>
+            </div>
+
+            <div class="bento-card">
+              <div class="bento-card-header">
+                📱
+                <span class="tag-badge">Mobile</span>
+              </div>
+              <div class="bento-stat">100%</div>
+              <div class="bento-title">Native Android</div>
+              <p class="bento-desc">Kotlin MVVM, Clean Architecture, StateFlow, Room &amp; Supabase cloud synchronization.</p>
+            </div>
+
+            <div class="bento-card">
+              <div class="bento-card-header">
+                💳
+                <span class="tag-badge">Fintech</span>
+              </div>
+              <div class="bento-stat">v3</div>
+              <div class="bento-title">Tingg &amp; MoMo</div>
+              <p class="bento-desc">Decoupled Node.js microservices, STK Push PIN orchestration, OAuth2 tokens &amp; webhooks.</p>
+            </div>
+
+            <div class="bento-card">
+              <div class="bento-card-header">
+                <div class="bento-icon-box">🛡️</div>
+                <span class="tag-badge">Network</span>
+              </div>
+              <div class="bento-stat">CCNA</div>
+              <div class="bento-title">Cisco Certified</div>
+              <p class="bento-desc">Infrastructure routing, enterprise firewalls, Linux sysadmin &amp; zero-cost architectures.</p>
+            </div>
+
+            <!-- Full-width Tech Stack Banner -->
+            <div class="bento-card bento-wide">
+              <div class="bento-title">Primary Production Stack</div>
+              <div class="stack-tags-scroll">
+                <span class="tag-badge">Android (Kotlin)</span>
+                <span class="tag-badge">Next.js 14</span>
+                <span class="tag-badge">React</span>
+                <span class="tag-badge">TypeScript</span>
+                <span class="tag-badge">Node.js</span>
+                <span class="tag-badge">PostgreSQL</span>
+                <span class="tag-badge">Supabase</span>
+                <span class="tag-badge">IndexedDB</span>
+                <span class="tag-badge">Tailwind CSS</span>
+                <span class="tag-badge">WebSockets</span>
+                <span class="tag-badge">Cisco CCNA</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="site-wrapper">
-      <h2 class="contact-headline">Let's Build<br>Something.</h2>
-      <p class="contact-sub">Open to freelance projects, consulting, and full-time opportunities across Zambia and remotely.</p>
-      <div class="contact-links">
-        <a href="mailto:kamwisiya@gmail.com" class="contact-chip">✉ kamwisiya@gmail.com</a>
-        <a href="tel:+260974449780" class="contact-chip">📞 +260 97 444 9780</a>
-        <a href="https://project-n2h7n.vercel.app" target="_blank" class="contact-chip">🌐 Portfolio</a>
-        <button class="contact-chip" id="downloadCV2" style="border:1px solid var(--line);background:none;cursor:none;font-family:var(--font-body);letter-spacing:0.1em;text-transform:uppercase;">⬇ Download CV</button>
-        <button class="contact-chip" id="downloadCVLight2" style="border:1px solid var(--line);background:none;cursor:none;font-family:var(--font-body);letter-spacing:0.1em;text-transform:uppercase;">⬇ CV (Light)</button>
-      </div>
-    </div>
-  </section>
+    <!-- ==========================================================================
+         ABOUT & ENGINEERING PHILOSOPHY
+         ========================================================================== -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">01 / Engineering Background</div>
+          <h2 class="section-title">Built for Real-World Reliability</h2>
+          <p class="section-desc">Practical, high-uptime engineering designed for challenging connectivity and scalable operations.</p>
+        </div>
 
-  <!-- PROFESSIONAL REFERENCES -->
-  <section id="references">
-    <div class="site-wrapper">
-      <div class="section-header">
-        <span class="section-num">05</span>
-        <h2 class="section-title">Professional References</h2>
-        <div class="section-line"></div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
-        <div class="edu-item">
-          <div class="edu-degree">Ms. H. Mayuni</div>
-          <div class="edu-school">M.O.E DEBS · +260 977 859 540</div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-degree">Mr. Chaloba Wilson</div>
-          <div class="edu-school">MWATA SECONDARY HEAD · +260 977 694 982</div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-degree">Mr. Kalusa A.Z</div>
-          <div class="edu-school">Linda Secondary Head · +260 979 889 122</div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-degree">Mr. J. Chilongu</div>
-          <div class="edu-school">BICT Coordinator, ZICT College · +260 955 917 410</div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-degree">Mr. N. Nkole</div>
-          <div class="edu-school">Project Supervisor, ZICT College · +260 976 432 745</div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-degree">Madan Ann</div>
-          <div class="edu-school">Kafubu Water IT Dept · +260 977 857 463</div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <div class="about-grid">
+          <!-- Bio Story Card -->
+          <div class="about-bio-card">
+            <div>
+              <h3 class="about-lead">
+                I bridge the gap between robust software architecture and low-infrastructure constraints.
+              </h3>
+              <p class="about-text">
+                With a <strong>Bachelor of ICT with Education (Merit)</strong> from the University of Zambia, a <strong>Diploma in IT (Merit)</strong> from Copperbelt University, and official <strong>Cisco CCNA</strong> certification, I combine software craftsmanship with deep networking foundations.
+              </p>
+              <p class="about-text">
+                Over the past 8+ years, I’ve served as IT Specialist &amp; Planning Officer at Linda Secondary School, led large-scale data auditing during national Census operations with ZamStats, and engineered automated fintech checkout pipelines integrating Tingg Checkout v3 and Mobile Money (MTN/Airtel).
+              </p>
+            </div>
+            <div class="about-quote">
+              "I build software that doesn’t fail when the internet cuts or bandwidth fluctuates — clean, decoupled, and zero-cost where possible."
+            </div>
+          </div>
 
+          <!-- Feature Cards / Value Pillars -->
+          <div class="about-feature-boxes">
+            <div class="feature-box">
+              📶
+              <div class="feature-content">
+                <h4>Offline-First Architecture</h4>
+                <p>Designed zero-server single-file management systems backed by IndexedDB and LocalStorage, guaranteeing 100% uptime for institutions across low-connectivity regions.</p>
+              </div>
+            </div>
+
+            <div class="feature-box">
+              🔒
+              <div class="feature-content">
+                <h4>Fintech &amp; Secure Integrations</h4>
+                <p>Architected decoupled Node.js serverless microservices for Tingg Checkout v3 with OAuth2 bearer tokens, STK PIN pushes, encrypted env secret vaults, and automated sandbox UAT.</p>
+              </div>
+            </div>
+
+            <div class="feature-box">
+              📱
+              <div class="feature-content">
+                <h4>Clean Architecture Native Android</h4>
+                <p>Built enterprise-grade Kotlin mobile apps following SOLID principles, MVVM with StateFlow, Room DB persistence, and custom Google Drive media proxy servers for cost-free file hosting.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FEATURED PROJECTS SECTION
+         ========================================================================== -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">02 / Portfolio &amp; Case Studies</div>
+          <h2 class="section-title">Production Systems &amp; Deployments</h2>
+          <p class="section-desc">Explore live applications, fintech microservices, native Android solutions, and school management portals.</p>
+        </div>
+
+        <!-- Filterable Tabs -->
+        <div class="projects-filter-bar">
+          <button class="filter-btn active" data-filter="all">All Projects (9)</button>
+          <button class="filter-btn" data-filter="fintech">Fintech &amp; Enterprise</button>
+          <button class="filter-btn" data-filter="android">Native Android</button>
+          <button class="filter-btn" data-filter="edtech">EdTech &amp; Portals</button>
+          <button class="filter-btn" data-filter="offline">Offline-First</button>
+        </div>
+
+        <!-- Projects Bento Grid -->
+        <div class="projects-grid" id="projectsGrid">
+
+          <!-- Project 1: Payment Checkout Page Creation -->
+          <a href="project-payment.html" class="project-card" data-category="fintech">
+            <div>
+              <div class="project-card-top">
+                💳
+                <span class="project-category-tag featured">Fintech Microservice</span>
+              </div>
+              <h3 class="project-title">Payment · Site · Page Creation</h3>
+              <div class="project-stack-text">Drupal · Node.js (Serverless) · Tingg Checkout v3 · OAuth2</div>
+              <p class="project-desc">
+                Responsive donation system with decoupled Node.js microservice handling OAuth2 server-to-server token exchange, Mobile Money STK push orchestration, encrypted cloud secrets, and sandbox test automation.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <span>Case Study &amp; API Architecture</span>
+              <span class="project-action-link">View Details →</span>
+            </div>
+          </a>
+
+          <!-- Project 2: Livingstone Real Estate Platform -->
+          <a href="project-realestate.html" class="project-card" data-category="android">
+            <div>
+              <div class="project-card-top">
+                🏠
+                <span class="project-category-tag featured">Android &amp; Cloud</span>
+              </div>
+              <h3 class="project-title">Livingstone Real Estate Platform</h3>
+              <div class="project-stack-text">Kotlin · MVVM · Clean Architecture · Supabase · Drive API</div>
+              <p class="project-desc">
+                Production-ready native Android rental app designed for Zambian landlords and tenants. Reactive UI with StateFlow, decoupled Domain/Data/UI layers, and custom Google Drive media proxy for cost-free photo hosting.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <span>Android MVVM Case Study</span>
+              <span class="project-action-link">View Details →</span>
+            </div>
+          </a>
+
+          <!-- Project 3: Loan Management Platform -->
+          <a href="project-loan.html" class="project-card" data-category="fintech">
+            <div>
+              <div class="project-card-top">
+                🏦
+                <span class="project-category-tag">Enterprise / Microfinance</span>
+              </div>
+              <h3 class="project-title">Loan Management Platform</h3>
+              <div class="project-stack-text">Node.js · PostgreSQL · React · Kotlin Android · WebSockets</div>
+              <p class="project-desc">
+                Full-stack microfinance platform featuring live WebSocket repayment syncing, multi-tenant RBAC permissions, audit trails, and a companion Android field officer app.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <span>Full-Stack Platform Case Study</span>
+              <span class="project-action-link">View Details →</span>
+            </div>
+          </a>
+
+          <!-- Project 4: Linda Secondary Results Portal -->
+          <a href="project-results.html" class="project-card" data-category="edtech">
+            <div>
+              <div class="project-card-top">
+                🏫
+                <span class="project-category-tag">EdTech Portal</span>
+              </div>
+              <h3 class="project-title">Linda Secondary Results Portal</h3>
+              <div class="project-stack-text">Next.js 14 · TypeScript · Google OAuth · jsPDF</div>
+              <p class="project-desc">
+                Role-based academic portal for teachers and students featuring automated dynamic PDF report card generation, Google Drive cloud synchronization, and secure OAuth authentication.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <span>Next.js 14 Portal Case Study</span>
+              <span class="project-action-link">View Details →</span>
+            </div>
+          </a>
+
+          <!-- Project 5: Offline School Management System -->
+          <a href="project-offline.html" class="project-card" data-category="offline">
+            <div>
+              <div class="project-card-top">
+                <div class="project-icon-badge">🖥️</div>
+                <span class="project-category-tag featured">100% Offline-First</span>
+              </div>
+              <h3 class="project-title">Offline School Management System</h3>
+              <div class="project-stack-text">Vanilla JS · IndexedDB · HTML5 · CSS3</div>
+              <p class="project-desc">
+                Single-file browser-based SMS guaranteeing 100% uptime in low-connectivity schools. Powers automated timetabling for 32 classes and 67 teachers with local IndexedDB storage and zero server cost.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <span>Offline Architecture Case Study</span>
+              <span class="project-action-link">View Details →</span>
+            </div>
+          </a>
+
+          <!-- Project 6: DevCoach Android App -->
+          <a href="project-devcoach.html" class="project-card" data-category="android">
+            <div>
+              <div class="project-card-top">
+                📱
+                <span class="project-category-tag">Android Learning</span>
+              </div>
+              <h3 class="project-title">DevCoach Android App</h3>
+              <div class="project-stack-text">Kotlin · MVVM · WebView · AI Integration</div>
+              <p class="project-desc">
+                Interactive learning companion for software engineers with an in-app AI browser, automated schedule study push notifications, and curriculum maps across React, Next.js, Node.js, and Android.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <span>Android Case Study</span>
+              <span class="project-action-link">View Details →</span>
+            </div>
+          </a>
+
+          <!-- Project 7: Narty Rock School Portal -->
+          <a href="project-narty.html" class="project-card" data-category="edtech">
+            <div>
+              <div class="project-card-top">
+                🎓
+                <span class="project-category-tag">Full-Stack SaaS</span>
+              </div>
+              <h3 class="project-title">Narty Rock School Portal</h3>
+              <div class="project-stack-text">Next.js 14 · React · RBAC · Google Drive Sync</div>
+              <p class="project-desc">
+                Complete school portal with Automated Report Card Generator, Announcements Board, and Homework Publisher. Implements multi-tier RBAC for Admin, Teacher, and Student roles with gold-branded UI.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <span>Next.js Portal Case Study</span>
+              <span class="project-action-link">View Details →</span>
+            </div>
+          </a>
+
+          <!-- Project 8: Ace Tech Solutions Website -->
+          <a href="project-acetech.html" class="project-card" data-category="fintech">
+            <div>
+              <div class="project-card-top">
+                📊
+                <span class="project-category-tag">Business &amp; MoMo</span>
+              </div>
+              <h3 class="project-title">Ace Tech Solutions Website</h3>
+              <div class="project-stack-text">HTML5 · Modern CSS · JS · Formspree · MoMo</div>
+              <p class="project-desc">
+                Commercial business website covering all IT service offerings, MTN &amp; Airtel Mobile Money payment routing instructions, and Formspree contact integration — lightweight, zero hosting cost.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <span>Web Case Study</span>
+              <span class="project-action-link">View Details →</span>
+            </div>
+          </a>
+
+          <!-- Project 9: ZedIT Class eLearning Platform -->
+          <a href="project-zedit.html" class="project-card" data-category="edtech">
+            <div>
+              <div class="project-card-top">
+                📚
+                <span class="project-category-tag">eLearning Platform</span>
+              </div>
+              <h3 class="project-title">ZedIT Class eLearning Platform</h3>
+              <div class="project-stack-text">PHP · JavaScript · CSV Class Tools</div>
+              <p class="project-desc">
+                Interactive learning portal for Computer Studies with Grade 9 &amp; 12 study dashboards, exam prep tools, and curriculum-aligned content delivery.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <span>eLearning Case Study</span>
+              <span class="project-action-link">View Details →</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SKILLS & ARCHITECTURAL CAPABILITIES
+         ========================================================================== -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">03 / Technical Mastery</div>
+          <h2 class="section-title">Architecture &amp; Core Stack</h2>
+          <p class="section-desc">Battle-tested technologies and engineering practices applied across production systems.</p>
+        </div>
+
+        <div class="skills-bento-layout">
+          <!-- Card 1: Mobile & Frontend -->
+          <div class="skill-category-card">
+            <div class="skill-cat-header">
+              📱
+              <div>
+                <h3 class="skill-cat-title">Mobile &amp; Frontend</h3>
+                <span style="font-size:12px; color:var(--text-muted);">Client Architecture</span>
+              </div>
+            </div>
+            <div class="skill-chips-list">
+              <span class="skill-chip highlight">Android (Kotlin)</span>
+              <span class="skill-chip highlight">MVVM Pattern</span>
+              <span class="skill-chip">Clean Architecture</span>
+              <span class="skill-chip">StateFlow &amp; Coroutines</span>
+              <span class="skill-chip highlight">React</span>
+              <span class="skill-chip highlight">Next.js 14</span>
+              <span class="skill-chip">TypeScript</span>
+              <span class="skill-chip">Tailwind CSS</span>
+              <span class="skill-chip">Redux Toolkit</span>
+              <span class="skill-chip">HTML5 / Modern JS</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Backend, Cloud & Fintech -->
+          <div class="skill-category-card">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon">⚡</div>
+              <div>
+                <h3 class="skill-cat-title">Backend &amp; APIs</h3>
+                <span style="font-size:12px; color:var(--text-muted);">Microservices &amp; Integrations</span>
+              </div>
+            </div>
+            <div class="skill-chips-list">
+              <span class="skill-chip highlight">Node.js (Express)</span>
+              <span class="skill-chip highlight">Tingg Checkout v3 API</span>
+              <span class="skill-chip">Mobile Money (MTN/Airtel)</span>
+              <span class="skill-chip">OAuth2 &amp; Bearer Auth</span>
+              <span class="skill-chip highlight">PostgreSQL</span>
+              <span class="skill-chip highlight">Supabase</span>
+              <span class="skill-chip">PHP</span>
+              <span class="skill-chip">WebSockets (Real-time)</span>
+              <span class="skill-chip">RESTful APIs</span>
+              <span class="skill-chip">Google Drive API</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Resilient Architecture & Infrastructure -->
+          <div class="skill-category-card">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon">🛡️</div>
+              <div>
+                <h3 class="skill-cat-title">Infrastructure &amp; Network</h3>
+                <span style="font-size:12px; color:var(--text-muted);">Security &amp; High Availability</span>
+              </div>
+            </div>
+            <div class="skill-chips-list">
+              <span class="skill-chip highlight">Cisco CCNA</span>
+              <span class="skill-chip highlight">IndexedDB (Offline-First)</span>
+              <span class="skill-chip">Linux Administration</span>
+              <span class="skill-chip">Network Routing &amp; VLANs</span>
+              <span class="skill-chip">Git &amp; GitHub</span>
+              <span class="skill-chip">Vercel &amp; Netlify CI/CD</span>
+              <span class="skill-chip">Database Auditing</span>
+              <span class="skill-chip">CORS &amp; Proxy Routing</span>
+              <span class="skill-chip">Hardware &amp; Systems Support</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PROFESSIONAL EXPERIENCE TIMELINE
+         ========================================================================== -->
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">04 / Career History</div>
+          <h2 class="section-title">Professional Experience</h2>
+          <p class="section-desc">Track record of leadership, institutional software delivery, and data stewardship.</p>
+        </div>
+
+        <div class="timeline-wrapper">
+
+          <!-- Role 1 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <h3 class="timeline-role">ICT Teacher, IT Specialist &amp; School Planning Officer</h3>
+                <span class="timeline-period-badge">2016 – Present (8+ Years)</span>
+              </div>
+              <div class="timeline-org">📍 Linda Secondary School — Ministry of Education, Zambia</div>
+              <p class="timeline-desc">
+                Lead all institutional computing infrastructure, academic data systems, and exam operations for hundreds of students and faculty.
+              </p>
+              <ul class="timeline-bullets">
+                <li>Architected and deployed an in-house Offline School Management System (IndexedDB/JS) operating at 100% uptime during national load-shedding and connectivity drops.</li>
+                <li>Administer the computerized National Exam Centre infrastructure and grade report generation pipelines.</li>
+                <li>Supervise digital timetabling, student records synchronization, and hardware network maintenance across multiple computer laboratories.</li>
+              </ul>
+              <div class="stack-tags-scroll">
+                <span class="tag-badge">Vanilla JS</span>
+                <span class="tag-badge">IndexedDB</span>
+                <span class="tag-badge">Next.js</span>
+                <span class="tag-badge">Network Administration</span>
+                <span class="tag-badge">Systems Architecture</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Role 2 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <h3 class="timeline-role">Census Supervisor — Field Operations &amp; Data Auditing</h3>
+                <span class="timeline-period-badge">2022</span>
+              </div>
+              <div class="timeline-org">📍 Zambia Statistics Agency (ZamStats) — National Census</div>
+              <p class="timeline-desc">
+                Managed digital field enumeration devices, geographic boundary audits, and real-time database validation for government census metrics.
+              </p>
+              <ul class="timeline-bullets">
+                <li>Supervised field enumerator teams to maintain 100% digital sync integrity with central ZamStats servers.</li>
+                <li>Conducted real-time field data auditing, error reconciliation, and device hardware troubleshooting under strict timelines.</li>
+              </ul>
+              <div class="stack-tags-scroll">
+                <span class="tag-badge">Data Integrity</span>
+                <span class="tag-badge">Field Operations</span>
+                <span class="tag-badge">Database Auditing</span>
+                <span class="tag-badge">Team Supervision</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Role 3 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <h3 class="timeline-role">IT Systems &amp; Network Support Intern</h3>
+                <span class="timeline-period-badge">Prior Experience</span>
+              </div>
+              <div class="timeline-org">📍 Kafubu Water &amp; Sewerage Company — Utility Enterprise</div>
+              <p class="timeline-desc">
+                Delivered enterprise IT operations support, hardware maintenance, and subnet network infrastructure for utility billing and billing servers.
+              </p>
+              <div class="stack-tags-scroll">
+                <span class="tag-badge">Enterprise Networking</span>
+                <span class="tag-badge">Hardware Diagnostics</span>
+                <span class="tag-badge">IT Support</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         EDUCATION, CERTIFICATIONS & REFERENCES
+         ========================================================================== -->
+    <section class="section" id="credentials">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">05 / Credentials &amp; Endorsements</div>
+          <h2 class="section-title">Education, CCNA &amp; References</h2>
+          <p class="section-desc">Academic excellence from leading universities and verified professional references.</p>
+        </div>
+
+        <div class="edu-ref-layout">
+          <!-- Education Column -->
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:20px; font-weight:700; margin-bottom:20px; color:var(--text-primary);">
+              🎓 Education &amp; Certifications
+            </h3>
+
+            <div class="edu-card">
+              🏛️
+              <div>
+                <div class="edu-degree">Bachelor of ICT with Education (Merit / Credit)</div>
+                <div class="edu-school">University of Zambia · 2018 – 2022</div>
+                <div class="edu-detail">Comprehensive degree combining software engineering, advanced algorithms, database systems, and pedagogy.</div>
+              </div>
+            </div>
+
+            <div class="edu-card">
+              <div class="edu-icon-box">📜</div>
+              <div>
+                <div class="edu-degree">Diploma in Information Technology (Merit)</div>
+                <div class="edu-school">Copperbelt University · 2013 – 2015</div>
+                <div class="edu-detail">Core foundations in enterprise software, computer architecture, systems analysis, and programming.</div>
+              </div>
+            </div>
+
+            <div class="edu-card">
+              🛡️
+              <div>
+                <div class="edu-degree">Cisco CCNA Certification</div>
+                <div class="edu-school">Cisco Networking Academy · 2015 – 2016</div>
+                <div class="edu-detail">Enterprise networking, IP routing (OSPF, EIGRP), switching, VLANs, ACLs, and network security.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- References Column -->
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:20px; font-weight:700; margin-bottom:20px; color:var(--text-primary);">
+              ⭐ Professional References
+            </h3>
+
+            <div class="ref-grid">
+              <div class="ref-card">
+                <div class="ref-name">Ms. H. Mayuni</div>
+                <div class="ref-title">Ministry of Education — DEBS</div>
+                <button onclick="copyToClipboard('+260977859540', 'Phone copied!')" class="ref-phone-btn">
+                  <span>📞</span> +260 977 859 540
+                </button>
+              </div>
+
+              <div class="ref-card">
+                <div class="ref-name">Mr. Chaloba Wilson</div>
+                <div class="ref-title">Headteacher — Mwata Secondary</div>
+                <button onclick="copyToClipboard('+260977694982', 'Phone copied!')" class="ref-phone-btn">
+                  <span>📞</span> +260 977 694 982
+                </button>
+              </div>
+
+              <div class="ref-card">
+                <div class="ref-name">Mr. Kalusa A.Z</div>
+                <div class="ref-title">Headteacher — Linda Secondary</div>
+                <button onclick="copyToClipboard('+260979889122', 'Phone copied!')" class="ref-phone-btn">
+                  <span>📞</span> +260 979 889 122
+                </button>
+              </div>
+
+              <div class="ref-card">
+                <div class="ref-name">Mr. J. Chilongu</div>
+                <div class="ref-title">BICT Coordinator — ZICT College</div>
+                <button onclick="copyToClipboard('+260955917410', 'Phone copied!')" class="ref-phone-btn">
+                  <span>📞</span> +260 955 917 410
+                </button>
+              </div>
+
+              <div class="ref-card">
+                <div class="ref-name">Mr. N. Nkole</div>
+                <div class="ref-title">Project Supervisor — ZICT College</div>
+                <button onclick="copyToClipboard('+260976432745', 'Phone copied!')" class="ref-phone-btn">
+                  <span>📞</span> +260 976 432 745
+                </button>
+              </div>
+
+              <div class="ref-card">
+                <div class="ref-name">Madan Ann</div>
+                <div class="ref-title">IT Department — Kafubu Water</div>
+                <button onclick="copyToClipboard('+260977857463', 'Phone copied!')" class="ref-phone-btn">
+                  <span>📞</span> +260 977 857 463
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CONTACT SECTION & CONVERSION
+         ========================================================================== -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-card-main">
+          <!-- Left Column: Contact Channels -->
+          <div class="contact-info-col">
+            <div class="section-eyebrow" style="margin-bottom:8px;">06 / Get In Touch</div>
+            <h3>Let’s Build Something Exceptional.</h3>
+            <p>
+              Whether you need a robust native Android application, a production fintech microservice, or an institutional IT specialist, I’m ready to contribute immediately.
+            </p>
+
+            <div class="contact-channels">
+              <div class="channel-btn">
+                <div class="channel-left">
+                  <span class="channel-icon">✉</span>
+                  <div>
+                    <span class="channel-label">Direct Email</span>
+                    <span class="channel-value">kamwisiya@gmail.com</span>
+                  </div>
+                </div>
+                <button onclick="copyToClipboard('kamwisiya@gmail.com', 'Email copied!')" class="copy-chip-btn">
+                  Copy
+                </button>
+              </div>
+
+              <div class="channel-btn">
+                <div class="channel-left">
+                  📞
+                  <div>
+                    <span class="channel-label">Phone &amp; Mobile Money</span>
+                    <span class="channel-value">+260 97 444 9780 / +260 96 350 4919</span>
+                  </div>
+                </div>
+                <button onclick="copyToClipboard('+260974449780', 'Phone number copied!')" class="copy-chip-btn">
+                  Copy
+                </button>
+              </div>
+
+              <div class="channel-btn">
+                <div class="channel-left">
+                  🌐
+                  <div>
+                    <span class="channel-label">Portfolio Site</span>
+                    <span class="channel-value">project-n2h7n.vercel.app</span>
+                  </div>
+                </div>
+                <button onclick="copyToClipboard('https://project-n2h7n.vercel.app', 'Link copied!')" class="copy-chip-btn">
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Direct WhatsApp Action & CV -->
+          <div class="contact-action-boxes">
+            <div class="whatsapp-card">
+              <div style="font-size:36px; margin-bottom:12px;">💬</div>
+              <h4>Direct Chat on WhatsApp</h4>
+              <p>Prefer instant messaging? Reach out directly to discuss your project requirements or arrange an interview.</p>
+              <a href="https://wa.me/260974449780?text=Hello%20Kamwi,%20I%20viewed%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" class="btn-whatsapp">
+                <span>Start WhatsApp Chat</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+
+            <!-- Download CV Block -->
+            <div style="background:var(--bg-surface-elevated); border:1px solid var(--border-subtle); border-radius:var(--radius-lg); padding:24px; text-align:center;">
+              <h5 style="font-size:15px; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Need a copy of my Resume?</h5>
+              <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">Instant download formatted for recruiters and hiring managers.</p>
+              <div style="display:flex; justify-content:center; gap:10px;">
+                <a href="cv-dark.html" target="_blank" class="btn-secondary" style="font-size:13px; padding:8px 18px;">
+                  <span>🌙 Dark Theme CV</span>
+                </a>
+                <a href="cv-light.html" target="_blank" class="btn-secondary" style="font-size:13px; padding:8px 18px;">
+                  <span>🖨️ Light Theme CV</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
   <footer>
-    <div class="site-wrapper">
+    <div class="container">
       <div class="footer-inner">
-        <span class="footer-logo">Kamwi Siyauya</span>
-        <span class="footer-copy">© 2026 · Livingstone, Zambia · Built for Vercel</span>
+        <div>
+          <div class="footer-brand">Kamwi Siyauya</div>
+          <div class="footer-copy">Senior Full-Stack Developer &amp; Mobile App Architect · Livingstone, Zambia</div>
+        </div>
+        <div class="footer-copy">
+          © 2026 Kamwi Siyauya. Designed &amp; Engineered for High Performance.
+        </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    function downloadCV() {
-      window.open('cv-dark.html', '_blank');
-    }
-    document.getElementById('downloadCV').addEventListener('click', downloadCV);
-    document.getElementById('downloadCV2').addEventListener('click', downloadCV);
+  <!-- Toast Notification element -->
+  <div id="toast">
+    <span id="toastIcon">✓</span>
+    <span id="toastMsg">Action completed successfully</span>
+  </div>
 
-    // ── Light / print-friendly CV (opens a light-themed printable window)
-    function downloadCVLight() {
-      window.open('cv-light.html', '_blank');
-    }
-    document.getElementById('downloadCVLight').addEventListener('click', downloadCVLight);
-    document.getElementById('downloadCVLight2').addEventListener('click', downloadCVLight);
-
-    // ── Theme toggle
-    const html = document.documentElement;
-    const themeBtn = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('theme') || 'dark';
-    if (saved === 'light') html.setAttribute('data-theme', 'light');
-    themeBtn.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme');
-      const next = current === 'light' ? 'dark' : 'light';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-    });
-
-    // ── Custom cursor
-    const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-    });
-    function animRing() {
-      rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
-      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-      requestAnimationFrame(animRing);
-    }
-    animRing();
-    document.querySelectorAll('a, button, .project-card, .stat-box').forEach(el => {
-      el.addEventListener('mouseenter', () => { cursor.style.width = '20px'; cursor.style.height = '20px'; ring.style.width = '56px'; ring.style.height = '56px'; });
-      el.addEventListener('mouseleave', () => { cursor.style.width = '10px'; cursor.style.height = '10px'; ring.style.width = '36px'; ring.style.height = '36px'; });
-    });
-
-    // ── Scroll nav
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
-
-    // ── Mobile nav
-    const toggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
-
-    // ── Scroll reveal
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.exp-item, .project-card').forEach(el => obs.observe(el));
-  </script>
+  <!-- Main JavaScript File -->
+  <script src="main.js"></script>
 </body>
 </html>

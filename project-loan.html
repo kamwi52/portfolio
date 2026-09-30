@@ -1,23 +1,165 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Loan Management Platform</title>
-  <style>body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff;margin:0}.wrap{max-width:880px;margin:28px auto;padding:28px}h1{margin:0 0 8px}.meta{color:#666;font-size:13px}ul{margin:8px 0 0 18px}.back{margin-top:16px;display:inline-block}</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loan Management Platform — Engineering Case Study | Kamwi Siyauya</title>
+  <meta name="description" content="Technical case study of Loan Management Platform engineered by Kamwi Siyauya. System architecture, technology stack, and implementation breakdown." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .case-container { padding: 130px 0 80px; }
+    .code-block { background: #06090e; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px 20px; font-family: var(--font-mono); font-size: 13px; color: #38bdf8; overflow-x: auto; margin-top: 14px; line-height: 1.6; }
+    .back-nav { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; color: var(--accent-cyan); margin-bottom: 24px; transition: var(--transition-smooth); }
+    .back-nav:hover { transform: translateX(-4px); color: var(--text-primary); }
+    .project-nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-subtle); flex-wrap: wrap; gap: 16px; }
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Loan Management Platform</h1>
-    <div class="meta">Node.js · PostgreSQL · React · Kotlin Android · WebSockets</div>
-    <p style="color:#444">Summary: Full-stack loan management system with real-time WebSocket sync, RBAC access control, and a companion Android app — architected for Zambian microfinance institutions.</p>
-    <ul>
-      <li>Real-time repayment and disbursement events via WebSockets</li>
-      <li>RBAC and multi-tenant data partitioning</li>
-      <li>Kotlin Android companion app for field officers</li>
-      <li>Reporting and loan portfolio analytics</li>
-    </ul>
-    <a class="back" href="index.html">← Back to Portfolio</a>
+  <div id="scroll-progress"></div>
+  <div class="ambient-bg">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
   </div>
+
+  <header class="navbar-container scrolled">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-badge">KS</div>
+          <div class="brand-name">Kamwi <span>Siyauya</span></div>
+        </a>
+        <div class="nav-actions">
+          <a href="index.html#projects" class="btn-secondary" style="font-size:13px; padding:8px 16px;">← All Projects</a>
+          <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme" aria-label="Toggle Theme">
+            <svg class="theme-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg class="theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="case-container">
+    <div class="container">
+      <a href="index.html#projects" class="back-nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Back to All Projects</span>
+      </a>
+
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+        <div class="project-icon-badge" style="width:58px; height:58px; font-size:28px;">🏦</div>
+        <div>
+          <span class="project-category-tag featured">Enterprise Fintech</span>
+          <div style="margin-top:6px;"><span class="tag-badge highlight">Full-Stack & WebSockets</span></div>
+        </div>
+      </div>
+
+      <h1 class="hero-title" style="font-size:clamp(30px, 4.5vw, 48px); margin-bottom:16px;">Loan Management Platform</h1>
+
+      <div class="about-grid" style="margin-top:36px;">
+        <!-- Left Column: Scope & Deliverables -->
+        <div class="about-bio-card">
+          <div>
+            <h3 class="about-lead">Project Overview &amp; Objectives</h3>
+            <p class="about-text">Enterprise-grade microfinance lending platform designed to streamline loan origination, risk underwriting, repayment scheduling, and automated overdue penalty calculations across field agents and head office administrators.</p>
+            <h4 style="font-size:15px; font-weight:700; color:var(--text-primary); margin-bottom:12px; margin-top:20px;">Key Engineering Accomplishments:</h4>
+            <ul class="timeline-bullets"><li>Engineered dynamic amortization schedule engine calculating reducing-balance interest and late penalties.</li>
+<li>Implemented multi-tenant Role-Based Access Control (SuperAdmin, Branch Manager, Credit Officer, Auditor).</li>
+<li>Real-time WebSocket dashboard broadcasting incoming repayments and loan status approvals instantly.</li>
+<li>Comprehensive immutable audit logging for all transactional events and manual interest overrides.</li></ul>
+          </div>
+          <div style="margin-top:24px;">
+            <h4 style="font-size:14px; font-weight:700; color:var(--text-primary); margin-bottom:10px;">Technology Stack:</h4>
+            <div class="skill-chips-list"><span class="skill-chip">Node.js (Express)</span> <span class="skill-chip">PostgreSQL</span> <span class="skill-chip">React</span> <span class="skill-chip">Kotlin Android</span> <span class="skill-chip">WebSockets</span> <span class="skill-chip">Tailwind CSS</span> <span class="skill-chip">JWT Authentication</span></div>
+          </div>
+        </div>
+
+        <!-- Right Column: Architecture & Innovations -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div class="bento-card">
+            <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:10px;">System Architecture</h3>
+            <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">Node.js / Express backend with PostgreSQL relation schemas, WebSocket real-time event broadcasting, React administrative dashboard, and Kotlin Android field officer companion application.</p>
+            <pre class="code-block"><code>// Reducing-Balance Amortization Calculation Engine
+function calculateAmortizationSchedule({ principal, annualRate, months }) {
+  const monthlyRate = annualRate / 12 / 100;
+  const monthlyPayment = (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+  
+  let balance = principal;
+  const schedule = [];
+  
+  for (let month = 1; month <= months; month++) {
+    const interest = balance * monthlyRate;
+    const principalPaid = monthlyPayment - interest;
+    balance -= principalPaid;
+    
+    schedule.push({
+      month,
+      monthlyPayment: Number(monthlyPayment.toFixed(2)),
+      principalPaid: Number(principalPaid.toFixed(2)),
+      interestPaid: Number(interest.toFixed(2)),
+      remainingBalance: Number(Math.max(0, balance).toFixed(2))
+    });
+  }
+  return schedule;
+}</code></pre>
+          </div>
+
+          
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:14px;">Technical Highlights &amp; Solutions</h3>
+            
+    <div class="feature-box" style="margin-bottom:14px;">
+      🔄
+      <div class="feature-content">
+        <h4>Data Synchronization for Field Officers with Poor Connectivity</h4>
+        <p>Built a local SQLite sync queue inside the Android app that automatically dispatches stored loan applications once internet connectivity is restored.</p>
+      </div>
+    </div>
+  
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer CTA -->
+      <div style="margin-top:60px; text-align:center; padding:40px; background:var(--bg-card); border-radius:var(--radius-lg); border:1px solid var(--border-subtle);">
+        <h3 style="font-family:var(--font-display); font-size:24px; font-weight:800; margin-bottom:12px;">Interested in deploying this architecture?</h3>
+        <p style="color:var(--text-secondary); margin-bottom:24px; max-width:600px; margin-left:auto; margin-right:auto;">Let's discuss how this system design can be tailored for your specific organizational requirements.</p>
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+          <a href="index.html#contact" class="btn-primary">Get In Touch →</a>
+          <a href="cv-dark.html" target="_blank" class="btn-secondary">View Executive CV</a>
+        </div>
+      </div>
+
+      <!-- Next / Prev Project Navigation -->
+      <div class="project-nav-row">
+        <a href="project-realestate.html" class="back-nav">← Livingstone Real Estate Platform</a>
+        <a href="project-results.html" class="project-action-link">Linda Secondary Results Portal →</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">Kamwi Siyauya</div>
+          <div class="footer-copy">Senior Full-Stack Developer &amp; Mobile App Architect</div>
+        </div>
+        <div class="footer-copy">© 2026 Kamwi Siyauya. Built for Performance &amp; Reliability.</div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast">
+    <span id="toastIcon">✓</span>
+    <span id="toastMsg">Notification</span>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>

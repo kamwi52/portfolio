@@ -1,32 +1,185 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Payment · Site · Page Creation</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment · Site · Page Creation — Engineering Case Study | Kamwi Siyauya</title>
+  <meta name="description" content="Technical case study of Payment · Site · Page Creation engineered by Kamwi Siyauya. System architecture, technology stack, and implementation breakdown." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
   <style>
-    body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff;margin:0}
-    .wrap{max-width:880px;margin:28px auto;padding:28px}
-    h1{margin:0 0 8px}
-    .meta{color:#666;font-size:13px}
-    ul{margin:8px 0 0 18px}
-    .back{margin-top:16px;display:inline-block}
+    .case-container { padding: 130px 0 80px; }
+    .code-block { background: #06090e; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px 20px; font-family: var(--font-mono); font-size: 13px; color: #38bdf8; overflow-x: auto; margin-top: 14px; line-height: 1.6; }
+    .back-nav { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; color: var(--accent-cyan); margin-bottom: 24px; transition: var(--transition-smooth); }
+    .back-nav:hover { transform: translateX(-4px); color: var(--text-primary); }
+    .project-nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-subtle); flex-wrap: wrap; gap: 16px; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Payment · Site · Page Creation</h1>
-    <div class="meta">Drupal · HTML/CSS/JS · Node.js (serverless) · Tingg Checkout v3 · OAuth2 · Mobile Money</div>
-    <p style="color:#444">Summary: Implemented a responsive donation page with an advanced floating checkout modal and a decoupled Node.js serverless microservice to handle payment orchestration. Key features:</p>
-    <ul>
-      <li>Server-to-server OAuth2 token exchange and short-lived bearer tokens</li>
-      <li>Checkout registration and Mobile Money STK PIN push orchestration</li>
-      <li>Secure secrets stored in encrypted cloud environment variables</li>
-      <li>Automated sandbox payment simulations for UAT and reliable rollouts</li>
-      <li>Resolved CORS preflight and gateway/load-balancer routing issues</li>
-    </ul>
-    <p style="color:#444">If you want, I can add architecture diagrams, sample request/response snippets, or the microservice source in this repo.</p>
-    <a class="back" href="index.html">← Back to Portfolio</a>
+  <div id="scroll-progress"></div>
+  <div class="ambient-bg">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
   </div>
+
+  <header class="navbar-container scrolled">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-badge">KS</div>
+          <div class="brand-name">Kamwi <span>Siyauya</span></div>
+        </a>
+        <div class="nav-actions">
+          <a href="index.html#projects" class="btn-secondary" style="font-size:13px; padding:8px 16px;">← All Projects</a>
+          <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme" aria-label="Toggle Theme">
+            <svg class="theme-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg class="theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="case-container">
+    <div class="container">
+      <a href="index.html#projects" class="back-nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Back to All Projects</span>
+      </a>
+
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+        <div class="project-icon-badge" style="width:58px; height:58px; font-size:28px;">💳</div>
+        <div>
+          <span class="project-category-tag featured">Fintech Microservice</span>
+          <div style="margin-top:6px;"><span class="tag-badge highlight">Tingg Checkout v3 API</span></div>
+        </div>
+      </div>
+
+      <h1 class="hero-title" style="font-size:clamp(30px, 4.5vw, 48px); margin-bottom:16px;">Payment · Site · Page Creation</h1>
+
+      <div class="about-grid" style="margin-top:36px;">
+        <!-- Left Column: Scope & Deliverables -->
+        <div class="about-bio-card">
+          <div>
+            <h3 class="about-lead">Project Overview &amp; Objectives</h3>
+            <p class="about-text">Engineered an end-to-end donation and payment processing infrastructure integrating Tingg Checkout v3. Built a decoupled Node.js serverless microservice to abstract authentication, generate encrypted request payloads, trigger Mobile Money STK push PIN prompts, and ingest asynchronous transaction webhooks.</p>
+            <h4 style="font-size:15px; font-weight:700; color:var(--text-primary); margin-bottom:12px; margin-top:20px;">Key Engineering Accomplishments:</h4>
+            <ul class="timeline-bullets"><li>Engineered secure token exchange using OAuth2 Bearer Authentication without exposing API secrets to client browsers.</li>
+<li>Implemented automated retry mechanisms and resilient error handling for timeout-prone telecom networks.</li>
+<li>Built automated Postman sandbox collection for automated UAT test suites and regression validation.</li>
+<li>Deployed production-ready environment configuration with zero leakages of merchant credentials.</li></ul>
+          </div>
+          <div style="margin-top:24px;">
+            <h4 style="font-size:14px; font-weight:700; color:var(--text-primary); margin-bottom:10px;">Technology Stack:</h4>
+            <div class="skill-chips-list"><span class="skill-chip">Drupal</span> <span class="skill-chip">Node.js (Serverless)</span> <span class="skill-chip">Tingg Checkout v3 API</span> <span class="skill-chip">OAuth2</span> <span class="skill-chip">REST APIs</span> <span class="skill-chip">Postman</span> <span class="skill-chip">Mobile Money (MTN / Airtel)</span></div>
+          </div>
+        </div>
+
+        <!-- Right Column: Architecture & Innovations -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div class="bento-card">
+            <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:10px;">System Architecture</h3>
+            <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">Decoupled 3-tier architecture: Drupal client frontend initiates transaction intents -> Serverless Node.js backend handles OAuth2 client credential token exchange with Tingg -> Tingg API triggers real-time STK push on user handset -> Webhook updates status in real-time.</p>
+            <pre class="code-block"><code>// Node.js Tingg Checkout v3 Serverless Proxy
+const axios = require('axios');
+
+async function initiateTinggPayment(req, res) {
+  try {
+    const { amount, currency, phone, merchantRef } = req.body;
+    
+    // 1. OAuth2 Server-to-Server Token Exchange
+    const tokenRes = await axios.post(process.env.TINGG_AUTH_URL, {
+      client_id: process.env.TINGG_CLIENT_ID,
+      client_secret: process.env.TINGG_CLIENT_SECRET,
+      grant_type: 'client_credentials'
+    });
+    
+    const accessToken = tokenRes.data.access_token;
+    
+    // 2. Initiate STK Push Payment Request
+    const paymentRes = await axios.post(
+      process.env.TINGG_CHECKOUT_URL,
+      {
+        merchantTransactionID: merchantRef,
+        customerMSISDN: phone,
+        amount: amount,
+        currencyCode: currency,
+        serviceCode: process.env.TINGG_SERVICE_CODE,
+        callBackUrl: process.env.WEBHOOK_CALLBACK_URL
+      },
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    
+    return res.status(200).json({ success: true, checkoutUrl: paymentRes.data.checkoutUrl });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+}</code></pre>
+          </div>
+
+          
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:14px;">Technical Highlights &amp; Solutions</h3>
+            
+    <div class="feature-box" style="margin-bottom:14px;">
+      📶
+      <div class="feature-content">
+        <h4>Telecom Network Latency & Dropped Requests</h4>
+        <p>Added exponential backoff retries and idempotent webhook listeners so intermittent cellular connectivity never causes duplicate charges.</p>
+      </div>
+    </div>
+  
+    <div class="feature-box" style="margin-bottom:14px;">
+      🔒
+      <div class="feature-content">
+        <h4>Credential Security in Public Frontends</h4>
+        <p>Separated payment initiation into a serverless gateway proxy, ensuring client devices only receive temporary, non-reusable checkout sessions.</p>
+      </div>
+    </div>
+  
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer CTA -->
+      <div style="margin-top:60px; text-align:center; padding:40px; background:var(--bg-card); border-radius:var(--radius-lg); border:1px solid var(--border-subtle);">
+        <h3 style="font-family:var(--font-display); font-size:24px; font-weight:800; margin-bottom:12px;">Interested in deploying this architecture?</h3>
+        <p style="color:var(--text-secondary); margin-bottom:24px; max-width:600px; margin-left:auto; margin-right:auto;">Let's discuss how this system design can be tailored for your specific organizational requirements.</p>
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+          <a href="index.html#contact" class="btn-primary">Get In Touch →</a>
+          <a href="cv-dark.html" target="_blank" class="btn-secondary">View Executive CV</a>
+        </div>
+      </div>
+
+      <!-- Next / Prev Project Navigation -->
+      <div class="project-nav-row">
+        <span></span>
+        <a href="project-realestate.html" class="project-action-link">Livingstone Real Estate Platform →</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">Kamwi Siyauya</div>
+          <div class="footer-copy">Senior Full-Stack Developer &amp; Mobile App Architect</div>
+        </div>
+        <div class="footer-copy">© 2026 Kamwi Siyauya. Built for Performance &amp; Reliability.</div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast">
+    <span id="toastIcon">✓</span>
+    <span id="toastMsg">Notification</span>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>

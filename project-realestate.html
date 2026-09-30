@@ -1,32 +1,174 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Livingstone Real Estate Platform</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Livingstone Real Estate Platform — Engineering Case Study | Kamwi Siyauya</title>
+  <meta name="description" content="Technical case study of Livingstone Real Estate Platform engineered by Kamwi Siyauya. System architecture, technology stack, and implementation breakdown." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
   <style>
-    body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff;margin:0}
-    .wrap{max-width:880px;margin:28px auto;padding:28px}
-    h1{margin:0 0 8px}
-    .meta{color:#666;font-size:13px}
-    ul{margin:8px 0 0 18px}
-    .back{margin-top:16px;display:inline-block}
+    .case-container { padding: 130px 0 80px; }
+    .code-block { background: #06090e; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px 20px; font-family: var(--font-mono); font-size: 13px; color: #38bdf8; overflow-x: auto; margin-top: 14px; line-height: 1.6; }
+    .back-nav { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; color: var(--accent-cyan); margin-bottom: 24px; transition: var(--transition-smooth); }
+    .back-nav:hover { transform: translateX(-4px); color: var(--text-primary); }
+    .project-nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-subtle); flex-wrap: wrap; gap: 16px; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Livingstone Real Estate Platform</h1>
-    <div class="meta">Kotlin · MVVM · Clean Architecture · Supabase · Drive API</div>
-    <p style="color:#444">Summary: Production-ready Android rental app designed for Livingstone landlords and tenants. Built with a focus on maintainability and offline resiliency. Key highlights:</p>
-    <ul>
-      <li>Clean Architecture with separate Domain, Data, and Presentation layers</li>
-      <li>MVVM pattern using StateFlow for reactive UI and predictable state management</li>
-      <li>Supabase backend for auth and data storage; Google Drive proxy for cost-free media hosting</li>
-      <li>Optimised image upload and caching for low-bandwidth environments</li>
-      <li>Role-based flows for landlords, tenants, and property managers</li>
-    </ul>
-    <p style="color:#444">I can add screenshots, API examples, or the Android module if you'd like this added to the repo.</p>
-    <a class="back" href="index.html">← Back to Portfolio</a>
+  <div id="scroll-progress"></div>
+  <div class="ambient-bg">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
   </div>
+
+  <header class="navbar-container scrolled">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-badge">KS</div>
+          <div class="brand-name">Kamwi <span>Siyauya</span></div>
+        </a>
+        <div class="nav-actions">
+          <a href="index.html#projects" class="btn-secondary" style="font-size:13px; padding:8px 16px;">← All Projects</a>
+          <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme" aria-label="Toggle Theme">
+            <svg class="theme-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg class="theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="case-container">
+    <div class="container">
+      <a href="index.html#projects" class="back-nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Back to All Projects</span>
+      </a>
+
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+        <div class="project-icon-badge" style="width:58px; height:58px; font-size:28px;">🏠</div>
+        <div>
+          <span class="project-category-tag featured">Native Android & Cloud</span>
+          <div style="margin-top:6px;"><span class="tag-badge highlight">Kotlin Clean Architecture & MVVM</span></div>
+        </div>
+      </div>
+
+      <h1 class="hero-title" style="font-size:clamp(30px, 4.5vw, 48px); margin-bottom:16px;">Livingstone Real Estate Platform</h1>
+
+      <div class="about-grid" style="margin-top:36px;">
+        <!-- Left Column: Scope & Deliverables -->
+        <div class="about-bio-card">
+          <div>
+            <h3 class="about-lead">Project Overview &amp; Objectives</h3>
+            <p class="about-text">Production-ready native Android property discovery and rental management platform tailored for landlords, property agents, and tenants in Livingstone, Zambia. Engineered following strict Clean Architecture principles with reactive StateFlow state machines.</p>
+            <h4 style="font-size:15px; font-weight:700; color:var(--text-primary); margin-bottom:12px; margin-top:20px;">Key Engineering Accomplishments:</h4>
+            <ul class="timeline-bullets"><li>Engineered offline-ready caching using Android Room Database to allow tenants to browse saved listings without data.</li>
+<li>Built a cost-free media storage engine using a custom Google Drive REST API proxy, eliminating expensive cloud storage fees.</li>
+<li>Created reactive search filters with instant multi-criteria sorting (price, bedrooms, location coordinates, amenities).</li>
+<li>Integrated direct landlord-to-tenant communication with automated WhatsApp and phone routing.</li></ul>
+          </div>
+          <div style="margin-top:24px;">
+            <h4 style="font-size:14px; font-weight:700; color:var(--text-primary); margin-bottom:10px;">Technology Stack:</h4>
+            <div class="skill-chips-list"><span class="skill-chip">Kotlin</span> <span class="skill-chip">Android SDK</span> <span class="skill-chip">Clean Architecture</span> <span class="skill-chip">MVVM Pattern</span> <span class="skill-chip">StateFlow / Coroutines</span> <span class="skill-chip">Supabase (PostgreSQL)</span> <span class="skill-chip">Google Drive API Proxy</span> <span class="skill-chip">ViewBinding</span></div>
+          </div>
+        </div>
+
+        <!-- Right Column: Architecture & Innovations -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div class="bento-card">
+            <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:10px;">System Architecture</h3>
+            <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">Strict separation of concerns across 3 modular layers: Presentation Layer (Kotlin Activities/Fragments, ViewBinding, StateFlow), Domain Layer (Use Cases, Business Rules, Repository Interfaces), and Data Layer (Supabase PostgreSQL Client, Room Database Offline Cache, Google Drive Media Proxy).</p>
+            <pre class="code-block"><code>// Kotlin MVVM Repository & Clean Architecture Flow
+class PropertyRepositoryImpl(
+    private val supabaseApi: SupabaseApiService,
+    private val localDao: PropertyDao,
+    private val driveProxy: DriveMediaProxy
+) : PropertyRepository {
+
+    override fun getPropertiesStream(filter: PropertyFilter): Flow<Resource<List<Property>>> = flow {
+        emit(Resource.Loading())
+        
+        // 1. Emit cached local listings for instant rendering
+        val cached = localDao.getProperties(filter.city)
+        if (cached.isNotEmpty()) emit(Resource.Success(cached.map { it.toDomain() }))
+
+        try {
+            // 2. Fetch fresh listings from Supabase cloud
+            val remoteListings = supabaseApi.fetchProperties(filter.toQueryMap())
+            localDao.insertAll(remoteListings.map { it.toEntity() })
+            emit(Resource.Success(remoteListings.map { it.toDomain() }))
+        } catch (e: Exception) {
+            emit(Resource.Error(e.localizedMessage ?: "Failed to sync remote listings"))
+        }
+    }.flowOn(Dispatchers.IO)
+}</code></pre>
+          </div>
+
+          
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:14px;">Technical Highlights &amp; Solutions</h3>
+            
+    <div class="feature-box" style="margin-bottom:14px;">
+      ☁️
+      <div class="feature-content">
+        <h4>Zero-Cost Media Hosting for High-Resolution Photos</h4>
+        <p>Engineered a specialized proxy that uploads listing images to an institutional Google Drive account and streams optimized preview thumbnails directly to Android image loaders.</p>
+      </div>
+    </div>
+  
+    <div class="feature-box" style="margin-bottom:14px;">
+      💾
+      <div class="feature-content">
+        <h4>Memory Leaks & Large Image Lists</h4>
+        <p>Configured Coroutine-backed background decoding and Glide memory caching pipelines to prevent OutOfMemory errors on entry-level Android devices.</p>
+      </div>
+    </div>
+  
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer CTA -->
+      <div style="margin-top:60px; text-align:center; padding:40px; background:var(--bg-card); border-radius:var(--radius-lg); border:1px solid var(--border-subtle);">
+        <h3 style="font-family:var(--font-display); font-size:24px; font-weight:800; margin-bottom:12px;">Interested in deploying this architecture?</h3>
+        <p style="color:var(--text-secondary); margin-bottom:24px; max-width:600px; margin-left:auto; margin-right:auto;">Let's discuss how this system design can be tailored for your specific organizational requirements.</p>
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+          <a href="index.html#contact" class="btn-primary">Get In Touch →</a>
+          <a href="cv-dark.html" target="_blank" class="btn-secondary">View Executive CV</a>
+        </div>
+      </div>
+
+      <!-- Next / Prev Project Navigation -->
+      <div class="project-nav-row">
+        <a href="project-payment.html" class="back-nav">← Payment · Site · Page Creation</a>
+        <a href="project-loan.html" class="project-action-link">Loan Management Platform →</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">Kamwi Siyauya</div>
+          <div class="footer-copy">Senior Full-Stack Developer &amp; Mobile App Architect</div>
+        </div>
+        <div class="footer-copy">© 2026 Kamwi Siyauya. Built for Performance &amp; Reliability.</div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast">
+    <span id="toastIcon">✓</span>
+    <span id="toastMsg">Notification</span>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>

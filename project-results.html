@@ -1,23 +1,174 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Linda Secondary Results Portal</title>
-  <style>body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff;margin:0}.wrap{max-width:880px;margin:28px auto;padding:28px}h1{margin:0 0 8px}.meta{color:#666;font-size:13px}ul{margin:8px 0 0 18px}.back{margin-top:16px;display:inline-block}</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linda Secondary Results Portal — Engineering Case Study | Kamwi Siyauya</title>
+  <meta name="description" content="Technical case study of Linda Secondary Results Portal engineered by Kamwi Siyauya. System architecture, technology stack, and implementation breakdown." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .case-container { padding: 130px 0 80px; }
+    .code-block { background: #06090e; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px 20px; font-family: var(--font-mono); font-size: 13px; color: #38bdf8; overflow-x: auto; margin-top: 14px; line-height: 1.6; }
+    .back-nav { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; color: var(--accent-cyan); margin-bottom: 24px; transition: var(--transition-smooth); }
+    .back-nav:hover { transform: translateX(-4px); color: var(--text-primary); }
+    .project-nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-subtle); flex-wrap: wrap; gap: 16px; }
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Linda Secondary Results Portal</h1>
-    <div class="meta">Next.js 14 · TypeScript · Google OAuth · jsPDF</div>
-    <p style="color:#444">Summary: Role-based portal for teachers and students with automated PDF report generation, Google Drive cloud sync, and secure OAuth authentication.</p>
-    <ul>
-      <li>Grade-based report generation with jsPDF</li>
-      <li>Google Drive sync for backups and teacher access</li>
-      <li>Role-based authorization for teachers, admins and students</li>
-      <li>Exportable exam analytics and class performance dashboards</li>
-    </ul>
-    <a class="back" href="index.html">← Back to Portfolio</a>
+  <div id="scroll-progress"></div>
+  <div class="ambient-bg">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
   </div>
+
+  <header class="navbar-container scrolled">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-badge">KS</div>
+          <div class="brand-name">Kamwi <span>Siyauya</span></div>
+        </a>
+        <div class="nav-actions">
+          <a href="index.html#projects" class="btn-secondary" style="font-size:13px; padding:8px 16px;">← All Projects</a>
+          <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme" aria-label="Toggle Theme">
+            <svg class="theme-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg class="theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="case-container">
+    <div class="container">
+      <a href="index.html#projects" class="back-nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Back to All Projects</span>
+      </a>
+
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+        <div class="project-icon-badge" style="width:58px; height:58px; font-size:28px;">🏫</div>
+        <div>
+          <span class="project-category-tag featured">EdTech Web Portal</span>
+          <div style="margin-top:6px;"><span class="tag-badge highlight">Next.js 14 & Automated jsPDF</span></div>
+        </div>
+      </div>
+
+      <h1 class="hero-title" style="font-size:clamp(30px, 4.5vw, 48px); margin-bottom:16px;">Linda Secondary Results Portal</h1>
+
+      <div class="about-grid" style="margin-top:36px;">
+        <!-- Left Column: Scope & Deliverables -->
+        <div class="about-bio-card">
+          <div>
+            <h3 class="about-lead">Project Overview &amp; Objectives</h3>
+            <p class="about-text">Institutional academic management and report card distribution platform serving Linda Secondary School. Enables teachers to compute term grades, generate print-ready dynamic PDF report cards, and allows students to access results securely online.</p>
+            <h4 style="font-size:15px; font-weight:700; color:var(--text-primary); margin-bottom:12px; margin-top:20px;">Key Engineering Accomplishments:</h4>
+            <ul class="timeline-bullets"><li>Engineered automated PDF generation engine rendering individualized term report cards with institutional seal and grade analytics.</li>
+<li>Streamlined end-of-term grading workflow, reducing administrative report production time from weeks to seconds.</li>
+<li>Integrated Google OAuth2 authentication for role-separated teacher and student access.</li>
+<li>Automated batch export and cloud archiving to Google Drive.</li></ul>
+          </div>
+          <div style="margin-top:24px;">
+            <h4 style="font-size:14px; font-weight:700; color:var(--text-primary); margin-bottom:10px;">Technology Stack:</h4>
+            <div class="skill-chips-list"><span class="skill-chip">Next.js 14</span> <span class="skill-chip">TypeScript</span> <span class="skill-chip">jsPDF</span> <span class="skill-chip">Google OAuth2</span> <span class="skill-chip">Tailwind CSS</span> <span class="skill-chip">Google Drive API</span></div>
+          </div>
+        </div>
+
+        <!-- Right Column: Architecture & Innovations -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div class="bento-card">
+            <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:10px;">System Architecture</h3>
+            <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">Next.js 14 App Router, TypeScript, jsPDF dynamic document generation engine, Google OAuth2 login authentication, and Google Drive cloud storage backups.</p>
+            <pre class="code-block"><code>// Dynamic Report Card PDF Generation with jsPDF
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
+export function generateReportCard(student, grades, termInfo) {
+  const doc = new jsPDF();
+  
+  // Header & School Crest
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  doc.text('LINDA SECONDARY SCHOOL', 105, 20, { align: 'center' });
+  doc.setFontSize(12);
+  doc.text(`OFFICIAL ACADEMIC REPORT — ${termInfo.term}, ${termInfo.year}`, 105, 28, { align: 'center' });
+  
+  // Student Metadata
+  doc.setFontSize(10);
+  doc.text(`Student Name: ${student.name}`, 14, 40);
+  doc.text(`Exam No: ${student.examNo}`, 14, 46);
+  doc.text(`Class: ${student.gradeClass}`, 140, 40);
+  
+  // Grade Table
+  const tableData = grades.map(g => [g.subject, g.score, g.grade, g.remarks, g.teacher]);
+  doc.autoTable({
+    startY: 52,
+    head: [['Subject', 'Score (%)', 'Grade', 'Teacher Remarks', 'Instructor']],
+    body: tableData,
+    theme: 'striped',
+    headStyles: { fillColor: [15, 23, 42] }
+  });
+  
+  doc.save(`ReportCard_${student.examNo}.pdf`);
+}</code></pre>
+          </div>
+
+          
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:14px;">Technical Highlights &amp; Solutions</h3>
+            
+    <div class="feature-box" style="margin-bottom:14px;">
+      📄
+      <div class="feature-content">
+        <h4>Dynamic High-DPI PDF Rendering in Browser</h4>
+        <p>Optimized jsPDF coordinate mapping and custom fonts to ensure crisp printable report cards across all screen resolutions and legacy school printers.</p>
+      </div>
+    </div>
+  
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer CTA -->
+      <div style="margin-top:60px; text-align:center; padding:40px; background:var(--bg-card); border-radius:var(--radius-lg); border:1px solid var(--border-subtle);">
+        <h3 style="font-family:var(--font-display); font-size:24px; font-weight:800; margin-bottom:12px;">Interested in deploying this architecture?</h3>
+        <p style="color:var(--text-secondary); margin-bottom:24px; max-width:600px; margin-left:auto; margin-right:auto;">Let's discuss how this system design can be tailored for your specific organizational requirements.</p>
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+          <a href="index.html#contact" class="btn-primary">Get In Touch →</a>
+          <a href="cv-dark.html" target="_blank" class="btn-secondary">View Executive CV</a>
+        </div>
+      </div>
+
+      <!-- Next / Prev Project Navigation -->
+      <div class="project-nav-row">
+        <a href="project-loan.html" class="back-nav">← Loan Management Platform</a>
+        <a href="project-offline.html" class="project-action-link">Offline School Management System →</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">Kamwi Siyauya</div>
+          <div class="footer-copy">Senior Full-Stack Developer &amp; Mobile App Architect</div>
+        </div>
+        <div class="footer-copy">© 2026 Kamwi Siyauya. Built for Performance &amp; Reliability.</div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast">
+    <span id="toastIcon">✓</span>
+    <span id="toastMsg">Notification</span>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>

@@ -1,22 +1,161 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Narty Rock School Portal</title>
-  <style>body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff;margin:0}.wrap{max-width:880px;margin:28px auto;padding:28px}h1{margin:0 0 8px}.meta{color:#666;font-size:13px}ul{margin:8px 0 0 18px}.back{margin-top:16px;display:inline-block}</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Narty Rock School Portal — Engineering Case Study | Kamwi Siyauya</title>
+  <meta name="description" content="Technical case study of Narty Rock School Portal engineered by Kamwi Siyauya. System architecture, technology stack, and implementation breakdown." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .case-container { padding: 130px 0 80px; }
+    .code-block { background: #06090e; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px 20px; font-family: var(--font-mono); font-size: 13px; color: #38bdf8; overflow-x: auto; margin-top: 14px; line-height: 1.6; }
+    .back-nav { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; color: var(--accent-cyan); margin-bottom: 24px; transition: var(--transition-smooth); }
+    .back-nav:hover { transform: translateX(-4px); color: var(--text-primary); }
+    .project-nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-subtle); flex-wrap: wrap; gap: 16px; }
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Narty Rock School Portal</h1>
-    <div class="meta">Next.js 14 · React · RBAC · Google Drive</div>
-    <p style="color:#444">Summary: Full school portal with Report Card Generator, Announcements Board, and Homework Publisher. Role-based access for Admin, Teacher, and Student roles — navy-and-gold branded.</p>
-    <ul>
-      <li>Role-based dashboards and report card generation</li>
-      <li>Announcements and homework management modules</li>
-      <li>Google Drive integration for media and document storage</li>
-    </ul>
-    <a class="back" href="index.html">← Back to Portfolio</a>
+  <div id="scroll-progress"></div>
+  <div class="ambient-bg">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
   </div>
+
+  <header class="navbar-container scrolled">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-badge">KS</div>
+          <div class="brand-name">Kamwi <span>Siyauya</span></div>
+        </a>
+        <div class="nav-actions">
+          <a href="index.html#projects" class="btn-secondary" style="font-size:13px; padding:8px 16px;">← All Projects</a>
+          <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme" aria-label="Toggle Theme">
+            <svg class="theme-icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <svg class="theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="case-container">
+    <div class="container">
+      <a href="index.html#projects" class="back-nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Back to All Projects</span>
+      </a>
+
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+        <div class="project-icon-badge" style="width:58px; height:58px; font-size:28px;">🎓</div>
+        <div>
+          <span class="project-category-tag featured">Full-Stack EdTech SaaS</span>
+          <div style="margin-top:6px;"><span class="tag-badge highlight">Next.js 14 & Multi-Tier RBAC</span></div>
+        </div>
+      </div>
+
+      <h1 class="hero-title" style="font-size:clamp(30px, 4.5vw, 48px); margin-bottom:16px;">Narty Rock School Portal</h1>
+
+      <div class="about-grid" style="margin-top:36px;">
+        <!-- Left Column: Scope & Deliverables -->
+        <div class="about-bio-card">
+          <div>
+            <h3 class="about-lead">Project Overview &amp; Objectives</h3>
+            <p class="about-text">Complete modern institutional school portal for Narty Rock School. Features role-based access control, homework assignment boards, school announcement feeds, and automated grade report card generation in a custom branded interface.</p>
+            <h4 style="font-size:15px; font-weight:700; color:var(--text-primary); margin-bottom:12px; margin-top:20px;">Key Engineering Accomplishments:</h4>
+            <ul class="timeline-bullets"><li>Role-separated dashboard views for Administrators, Teachers, and Parents/Students.</li>
+<li>Automated academic report card publishing with instant student portal access.</li>
+<li>Interactive digital homework submission and grading feedback module.</li>
+<li>Elegant gold-and-slate branded UI designed with responsive mobile-first typography.</li></ul>
+          </div>
+          <div style="margin-top:24px;">
+            <h4 style="font-size:14px; font-weight:700; color:var(--text-primary); margin-bottom:10px;">Technology Stack:</h4>
+            <div class="skill-chips-list"><span class="skill-chip">Next.js 14</span> <span class="skill-chip">React</span> <span class="skill-chip">TypeScript</span> <span class="skill-chip">Tailwind CSS</span> <span class="skill-chip">RBAC Security</span> <span class="skill-chip">Google Drive Sync</span></div>
+          </div>
+        </div>
+
+        <!-- Right Column: Architecture & Innovations -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div class="bento-card">
+            <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:10px;">System Architecture</h3>
+            <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">Next.js 14 App Router, Tailwind CSS, multi-tier RBAC security layer (SuperAdmin, Teacher, Parent/Student), and automated cloud media storage integration.</p>
+            <pre class="code-block"><code>// Next.js Middleware Role-Based Access Control
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+export function middleware(request: NextRequest) {
+  const token = request.cookies.get('session_token')?.value;
+  const userRole = request.cookies.get('user_role')?.value;
+  const path = request.nextUrl.pathname;
+
+  if (path.startsWith('/admin') && userRole !== 'SUPER_ADMIN') {
+    return NextResponse.redirect(new URL('/unauthorized', request.url));
+  }
+  
+  if (path.startsWith('/teacher') && !['SUPER_ADMIN', 'TEACHER'].includes(userRole || '')) {
+    return NextResponse.redirect(new URL('/unauthorized', request.url));
+  }
+
+  return NextResponse.next();
+}</code></pre>
+          </div>
+
+          
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:14px;">Technical Highlights &amp; Solutions</h3>
+            
+    <div class="feature-box" style="margin-bottom:14px;">
+      🔐
+      <div class="feature-content">
+        <h4>Strict Role-Based Authorization</h4>
+        <p>Designed custom Next.js middleware validating session JWT claims to prevent horizontal and vertical privilege escalation.</p>
+      </div>
+    </div>
+  
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer CTA -->
+      <div style="margin-top:60px; text-align:center; padding:40px; background:var(--bg-card); border-radius:var(--radius-lg); border:1px solid var(--border-subtle);">
+        <h3 style="font-family:var(--font-display); font-size:24px; font-weight:800; margin-bottom:12px;">Interested in deploying this architecture?</h3>
+        <p style="color:var(--text-secondary); margin-bottom:24px; max-width:600px; margin-left:auto; margin-right:auto;">Let's discuss how this system design can be tailored for your specific organizational requirements.</p>
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+          <a href="index.html#contact" class="btn-primary">Get In Touch →</a>
+          <a href="cv-dark.html" target="_blank" class="btn-secondary">View Executive CV</a>
+        </div>
+      </div>
+
+      <!-- Next / Prev Project Navigation -->
+      <div class="project-nav-row">
+        <a href="project-devcoach.html" class="back-nav">← DevCoach Android App</a>
+        <a href="project-acetech.html" class="project-action-link">Ace Tech Solutions Website →</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">Kamwi Siyauya</div>
+          <div class="footer-copy">Senior Full-Stack Developer &amp; Mobile App Architect</div>
+        </div>
+        <div class="footer-copy">© 2026 Kamwi Siyauya. Built for Performance &amp; Reliability.</div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast">
+    <span id="toastIcon">✓</span>
+    <span id="toastMsg">Notification</span>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
