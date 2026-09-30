@@ -332,6 +332,10 @@ a {
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.01em;
+  transition: var(--transition-bounce);
+  box-shadow: 0 4px 16px var(--accent-cyan-glow);
+}
+
 /* ==========================================================================
    HERO SECTION & BENTO
    ========================================================================== */
@@ -493,6 +497,10 @@ a {
   border-radius: var(--radius-sm);
   font-size: 13px;
   font-weight: 500;
+  color: var(--text-secondary);
+  transition: var(--transition-smooth);
+}
+
 /* Hero Bento Grid */
 .hero-bento-grid {
   display: grid;
@@ -693,6 +701,10 @@ a {
   padding-left: 16px;
   font-style: italic;
   color: var(--text-muted);
+  font-size: 14px;
+  margin-top: auto;
+}
+
 /* ==========================================================================
    PROJECTS SECTION & INTERACTIVE TABS
    ========================================================================== */
@@ -1113,6 +1125,11 @@ a {
   color: var(--text-muted);
   background: var(--bg-surface-elevated);
   padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  transition: var(--transition-smooth);
+}
+
 /* ==========================================================================
    CONTACT SECTION & FOOTER
    ========================================================================== */
@@ -1374,11 +1391,6 @@ footer {
   .ref-grid { grid-template-columns: 1fr; }
 }
 
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-subtle);
-  transition: var(--transition-smooth);
-}
-
 .ref-phone-btn:hover {
   color: var(--text-primary);
   border-color: var(--border-focus);
@@ -1409,10 +1421,6 @@ footer {
   border-color: rgba(56, 189, 248, 0.3);
   color: var(--accent-cyan);
   background: var(--accent-cyan-glow);
-}
-
-  font-size: 14px;
-  margin-top: auto;
 }
 
 .about-feature-boxes {
@@ -1464,17 +1472,9 @@ footer {
   line-height: 1.55;
 }
 
-  color: var(--text-secondary);
-  transition: var(--transition-smooth);
-}
-
 .cv-menu-item:hover {
   background: var(--bg-surface-elevated);
   color: var(--text-primary);
-}
-
-  transition: var(--transition-bounce);
-  box-shadow: 0 4px 16px var(--accent-cyan-glow);
 }
 
 .btn-nav-cta:hover {
