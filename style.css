@@ -649,11 +649,11 @@ a {
 
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 44px);
+  font-size: 32px;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--text-primary);
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .section-desc {
@@ -671,11 +671,10 @@ a {
 }
 
 .about-bio-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  backdrop-filter: blur(12px);
+  background: transparent;
+  border: none;
+  padding: 0;
+  backdrop-filter: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1116,18 +1115,11 @@ a {
   margin-bottom: 8px;
 }
 
-.ref-phone-btn {
+.ref-available {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
-  background: var(--bg-surface-elevated);
-  padding: 4px 8px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-subtle);
-  transition: var(--transition-smooth);
 }
 
 /* ==========================================================================
@@ -1391,11 +1383,6 @@ footer {
   .ref-grid { grid-template-columns: 1fr; }
 }
 
-.ref-phone-btn:hover {
-  color: var(--text-primary);
-  border-color: var(--border-focus);
-}
-
 .skill-chip {
   display: inline-flex;
   align-items: center;
@@ -1500,4 +1487,12 @@ button {
   border: none;
   background: none;
   cursor: pointer;
+}
+/* Clean up cards */
+.project-card, .skill-category-card, .timeline-card, .ref-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  backdrop-filter: none;
 }
