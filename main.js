@@ -73,13 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
           (filterValue === 'edtech' && (category === 'edtech' || category === 'offline'))
         ) {
           card.style.display = 'flex';
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(12px)';
-          setTimeout(() => {
-            card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          }, 30);
+          // Trigger reflow for animation
+          card.offsetHeight;
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
         } else {
           card.style.display = 'none';
         }
