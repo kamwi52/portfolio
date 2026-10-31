@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3. Project Filter Tabs
   const filterButtons = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('#projectsGrid .project-card');
+  const projectCards = document.querySelectorAll('#projectsGrid .skill-category-card');
 
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
